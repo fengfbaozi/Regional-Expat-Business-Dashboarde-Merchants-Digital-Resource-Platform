@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Carousel placeholder 2">
+  <defs>
+    <linearGradient id="c2bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a2245"/>
+      <stop offset="100%" stop-color="#050d1c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#c2bg)"/>
+  <circle cx="220" cy="150" r="110" fill="#ffc870" fill-opacity="0.14"/>
+  <circle cx="1060" cy="560" r="150" fill="#ffc870" fill-opacity="0.1"/>
+  <rect x="120" y="120" width="1040" height="480" rx="24" fill="none" stroke="#ffc870" stroke-width="2.8" stroke-dasharray="12 10"/>
+  <text x="640" y="330" text-anchor="middle" fill="#f8e7c0" font-size="56" font-family="Arial, sans-serif">CAROUSEL 02</text>
+  <text x="640" y="395" text-anchor="middle" fill="#d7c192" font-size="26" font-family="Arial, sans-serif">Navy Gold Data Tech Theme</text>
+</svg>

@@ -1,0 +1,258 @@
+﻿{
+    "generatedAt":  "2026-06-08T11:37:46.1849013Z",
+    "source":  "merchants.csv",
+    "cities":  [
+                   {
+                       "city":  "新山",
+                       "country":  "马来西亚",
+                       "lat":  1.492,
+                       "lng":  103.741,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "万象",
+                       "country":  "老挝",
+                       "lat":  17.975,
+                       "lng":  102.633,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "泗水",
+                       "country":  "印度尼西亚",
+                       "lat":  -7.258,
+                       "lng":  112.752,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "岘港",
+                       "country":  "越南",
+                       "lat":  16.054,
+                       "lng":  108.202,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "巴厘岛",
+                       "country":  "印度尼西亚",
+                       "lat":  -8.65,
+                       "lng":  115.217,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "马六甲",
+                       "country":  "马来西亚",
+                       "lat":  2.189,
+                       "lng":  102.25,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "合艾",
+                       "country":  "泰国",
+                       "lat":  7.008,
+                       "lng":  100.474,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "仰光",
+                       "country":  "缅甸",
+                       "lat":  16.841,
+                       "lng":  96.174,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "宿务",
+                       "country":  "菲律宾",
+                       "lat":  10.315,
+                       "lng":  123.885,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "巴色",
+                       "country":  "老挝",
+                       "lat":  15.12,
+                       "lng":  105.783,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "海防",
+                       "country":  "越南",
+                       "lat":  20.844,
+                       "lng":  106.688,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "吉隆坡",
+                       "country":  "马来西亚",
+                       "lat":  3.139,
+                       "lng":  101.687,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "清迈",
+                       "country":  "泰国",
+                       "lat":  18.788,
+                       "lng":  98.985,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "马尼拉",
+                       "country":  "菲律宾",
+                       "lat":  14.6,
+                       "lng":  120.984,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "曼谷",
+                       "country":  "泰国",
+                       "lat":  13.756,
+                       "lng":  100.502,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "古晋",
+                       "country":  "马来西亚",
+                       "lat":  1.553,
+                       "lng":  110.359,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "曼德勒",
+                       "country":  "缅甸",
+                       "lat":  21.958,
+                       "lng":  96.089,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "芭提雅",
+                       "country":  "泰国",
+                       "lat":  12.923,
+                       "lng":  100.883,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "雅加达",
+                       "country":  "印度尼西亚",
+                       "lat":  -6.209,
+                       "lng":  106.846,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "芹苴",
+                       "country":  "越南",
+                       "lat":  10.045,
+                       "lng":  105.746,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "棉兰",
+                       "country":  "印度尼西亚",
+                       "lat":  3.595,
+                       "lng":  98.672,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "南宁",
+                       "country":  "中国",
+                       "lat":  22.817,
+                       "lng":  108.366,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "琅勃拉邦",
+                       "country":  "老挝",
+                       "lat":  19.884,
+                       "lng":  102.135,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "西哈努克港",
+                       "country":  "柬埔寨",
+                       "lat":  10.627,
+                       "lng":  103.522,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "万隆",
+                       "country":  "印度尼西亚",
+                       "lat":  -6.917,
+                       "lng":  107.619,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "槟城",
+                       "country":  "马来西亚",
+                       "lat":  5.414,
+                       "lng":  100.329,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "普吉",
+                       "country":  "泰国",
+                       "lat":  7.88,
+                       "lng":  98.39,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "暹粒",
+                       "country":  "柬埔寨",
+                       "lat":  13.367,
+                       "lng":  103.844,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "新加坡",
+                       "country":  "新加坡",
+                       "lat":  1.352,
+                       "lng":  103.82,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "亚庇",
+                       "country":  "马来西亚",
+                       "lat":  5.98,
+                       "lng":  116.073,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "河内",
+                       "country":  "越南",
+                       "lat":  21.028,
+                       "lng":  105.834,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "金边",
+                       "country":  "柬埔寨",
+                       "lat":  11.556,
+                       "lng":  104.928,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "达沃",
+                       "country":  "菲律宾",
+                       "lat":  7.19,
+                       "lng":  125.455,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "斯里巴加湾市",
+                       "country":  "文莱",
+                       "lat":  4.903,
+                       "lng":  114.939,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "胡志明市",
+                       "country":  "越南",
+                       "lat":  10.823,
+                       "lng":  106.63,
+                       "source":  "csv"
+                   },
+                   {
+                       "city":  "玉林",
+                       "country":  "中国",
+                       "lat":  22.636,
+                       "lng":  110.186,
+                       "source":  "csv"
+                   }
+               ]
+}

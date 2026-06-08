@@ -1,0 +1,449 @@
+/**
+ * 首页专用：动效与交互增强（仅 body.page-home）
+ * 与 style.css 并存，后加载以覆盖细节；不涉及数据与路由。
+ */
+
+@keyframes phFadeUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 14px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* 仅关闭本文件定义的进场/交错动效，不覆盖 style.css 中地图与粒子等既有动画 */
+@media (prefers-reduced-motion: reduce) {
+    body.page-home.page-home--loaded .header,
+    body.page-home.page-home--loaded .data-overview-panel,
+    body.page-home.page-home--loaded .main-container,
+    body.page-home.page-home--loaded .core-service-card[data-home-staggered="1"],
+    body.page-home.page-home--loaded .demand-item[data-home-staggered="1"],
+    body.page-home.page-home--loaded .industry-card[data-home-staggered="1"] {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* —— 进场：主结构依次显现 —— */
+body.page-home.page-home--loaded .header {
+    animation: phFadeUp 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.04s both;
+}
+
+body.page-home.page-home--loaded .data-overview-panel {
+    animation: phFadeUp 0.58s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+body.page-home.page-home--loaded .main-container {
+    animation: phFadeUp 0.62s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both;
+}
+
+/* 动态注入卡片：由 JS 设置 --home-i */
+body.page-home.page-home--loaded .core-service-card[data-home-staggered="1"],
+body.page-home.page-home--loaded .demand-item[data-home-staggered="1"],
+body.page-home.page-home--loaded .industry-card[data-home-staggered="1"] {
+    animation: phFadeUp 0.48s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: calc(0.22s + min(var(--home-i, 0), 20) * 42ms);
+}
+
+/* —— 留白与圆角微调（不改变栅格比例逻辑） —— */
+body.page-home {
+    gap: clamp(8px, 1.2vh, 16px);
+}
+
+body.page-home .main-container {
+    gap: clamp(16px, 2.4vw, 36px) !important;
+}
+
+body.page-home .left-panel {
+    gap: clamp(14px, 1.6vh, 22px);
+}
+
+body.page-home .left-panel .panel,
+body.page-home .right-panel .core-services,
+body.page-home .bottom-nav.industry-board {
+    border-radius: 16px !important;
+}
+
+body.page-home .data-overview-panel {
+    border-radius: 16px !important;
+}
+
+/* —— 右栏：背景层次与数字人比例微调（覆盖 style 中 --digital-height，略收敛视觉体量） —— */
+body.page-home .right-panel {
+    --digital-height: clamp(300px, 43vh, 560px);
+}
+
+body.page-home .right-panel::before {
+    content: "";
+    position: absolute;
+    inset: -8% -12% auto -8%;
+    height: 72%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 88% 20%, rgba(120, 180, 255, 0.12), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 20% 80%, rgba(255, 200, 112, 0.06), transparent 50%);
+    opacity: 0.9;
+}
+
+/* 叠在右栏装饰渐变之上；数字人保持原稿 z-index，避免被产业带/地图层压住 */
+body.page-home .right-panel .core-services {
+    position: relative;
+    z-index: 2;
+}
+
+body.page-home .digital-human-slot {
+    position: relative;
+    z-index: 13;
+}
+
+/* 数字人可点击跳转，但不做悬停“按钮化”动效，避免与装饰混淆；交互由 style 中 cursor 与点击承担 */
+
+/* —— 仅真实链接：产业带卡片（a.industry-card）轻量悬停，深色描边、无高光白边 —— */
+@media (hover: hover) {
+    body.page-home a.industry-card {
+        transition:
+            transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.28s ease,
+            border-color 0.25s ease;
+    }
+
+    body.page-home a.industry-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.42);
+        border-color: rgba(56, 96, 150, 0.65) !important;
+    }
+}
+
+body.page-home a.industry-card:active {
+    transform: translateY(0) scale(0.99);
+}
+
+/*
+ * 首页核心服务：有悬停能力时，「进入 / 浏览」仅在鼠标悬停（或焦点在卡内链接）时展开，移开即收起。
+ * 触摸优先设备沿用点击切换 .is-expanded（由 main.js 控制）。
+ */
+@media (hover: hover) {
+    body.page-home .core-service-card {
+        position: relative;
+        cursor: default;
+    }
+
+    body.page-home .core-service-expand {
+        display: flex !important;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        grid-column: 1 / -1;
+        margin-top: 0 !important;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        padding-top: 0;
+        padding-bottom: 0;
+        transition:
+            opacity 0.22s ease,
+            max-height 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+            margin-top 0.22s ease;
+    }
+
+    body.page-home .core-service-card:hover .core-service-expand,
+    body.page-home .core-service-card:focus-within .core-service-expand {
+        max-height: 5.5rem;
+        opacity: 1;
+        margin-top: 6px !important;
+        pointer-events: auto;
+    }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: reduce) {
+    body.page-home .core-service-expand {
+        transition: opacity 0.15s ease;
+    }
+}
+
+@media (hover: none) {
+    body.page-home .core-service-card {
+        cursor: pointer;
+    }
+}
+
+/* —— 按钮统一：进入 / 更多 / 动态链接 —— */
+body.page-home .core-service-enter,
+body.page-home .panel-more,
+body.page-home .dynamic-link {
+    min-height: 32px;
+    padding: 6px 14px;
+    border-radius: 10px;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.22s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        filter 0.2s ease;
+}
+
+/* 覆盖全局 .dynamic-link:hover 的纯白字；仅首页、仅真实链接 */
+@media (hover: hover) {
+    body.page-home .dynamic-link:hover {
+        color: #e8d9b8 !important;
+        border-color: rgba(185, 145, 75, 0.55) !important;
+        background: rgba(65, 48, 22, 0.28);
+    }
+
+    body.page-home .panel-more:hover {
+        color: #ead8b6 !important;
+        border-color: rgba(175, 135, 65, 0.5) !important;
+        background: rgba(75, 55, 22, 0.32) !important;
+    }
+
+    body.page-home .core-service-enter:hover {
+        color: #cfe6f8 !important;
+        background: rgba(45, 105, 165, 0.38) !important;
+        border-color: rgba(95, 155, 210, 0.55) !important;
+    }
+
+    body.page-home .core-service-enter.secondary:hover {
+        color: #b8cce0 !important;
+        background: rgba(32, 72, 118, 0.42) !important;
+        border-color: rgba(75, 120, 170, 0.48) !important;
+    }
+}
+
+body.page-home .core-service-enter:active,
+body.page-home .panel-more:active,
+body.page-home .dynamic-link:active {
+    transform: scale(0.98);
+    filter: brightness(0.92);
+}
+
+/* 键盘焦点环：琥珀金 + 青蓝，避免浅白描边像「选中反白」 */
+body.page-home .core-service-enter:focus-visible,
+body.page-home .panel-more:focus-visible,
+body.page-home .dynamic-link:focus-visible,
+body.page-home a.industry-card:focus-visible,
+body.page-home .map-panel-link-cover:focus-visible,
+body.page-home .brand-logo:focus-visible,
+body.page-home .digital-human:focus-visible {
+    outline: 2px solid rgba(175, 125, 48, 0.88);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px rgba(45, 95, 160, 0.35);
+}
+
+/* 数据概览为只读展示，不增加悬停态，避免误以为可点 */
+body.page-home .data-overview-panel .data-item {
+    border-radius: 12px;
+}
+
+/* 侨情动态轮播点：仅按压反馈（span.dynamic-dot），无悬停态 */
+body.page-home .dynamic-dot {
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        background 0.2s ease;
+}
+
+body.page-home .dynamic-dot:active {
+    transform: scale(0.92);
+}
+
+/* —— 地图容器预热态：样式与瓦片就位前隐藏百度画布本身，保留遮罩动画 —— */
+body.page-home .home-map-panel.is-map-warming .baidu-map-container,
+.baidu-map-container.is-map-warming {
+    opacity: 0;
+    transition: opacity 0.48s ease;
+}
+
+body.page-home .home-map-panel .baidu-map-container,
+.baidu-map-container {
+    opacity: 1;
+    transition: opacity 0.48s ease;
+}
+
+/* 确保遮罩层在预热态始终可见，并提供平滑的遮罩淡出 */
+body.page-home .home-map-panel.is-map-warming .map-loading-mask,
+.baidu-map-container.is-map-warming ~ .map-loading-mask {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* —— 侨情动态轮播切换：标题与正文用透明度过渡，避免整卡重建式刷新 —— */
+body.page-home .left-panel .panel.dynamic .dynamic-title,
+body.page-home .left-panel .panel.dynamic .dynamic-summary,
+body.page-home .left-panel .panel.dynamic .dynamic-meta {
+    transition: opacity 0.28s ease;
+}
+
+body.page-home .left-panel .panel.dynamic .dynamic-title.is-switching,
+body.page-home .left-panel .panel.dynamic .dynamic-summary.is-switching,
+body.page-home .left-panel .panel.dynamic .dynamic-meta.is-switching {
+    opacity: 0;
+}
+
+/* —— 地图加载遮罩：海洋/指南针主题动画（替换云朵动图，配合深色地图界面） —— */
+.map-loading-mask {
+    background:
+        radial-gradient(circle at 50% 50%, rgba(18, 56, 100, 0.72), rgba(5, 16, 34, 0.92) 60%, rgba(3, 10, 22, 0.96) 100%);
+}
+
+.map-loading-mariner {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 同心环：不同速度、方向旋转的罗盘刻度圈 */
+.map-loading-mariner .compass-ring {
+    position: absolute;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: rgba(115, 186, 240, 0.55);
+    box-shadow: 0 0 12px rgba(90, 160, 220, 0.28) inset;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.map-loading-mariner .ring-outer {
+    width: 156px;
+    height: 156px;
+    border-width: 1px;
+    border-top-color: #e8c76a;
+    border-right-color: transparent;
+    border-bottom-color: rgba(115, 186, 240, 0.45);
+    border-left-color: transparent;
+    animation: compassRotateCW 6s linear infinite;
+}
+
+.map-loading-mariner .ring-mid {
+    width: 118px;
+    height: 118px;
+    border-width: 1px;
+    border-top-color: rgba(180, 215, 255, 0.75);
+    border-right-color: transparent;
+    border-bottom-color: rgba(180, 215, 255, 0.25);
+    border-left-color: transparent;
+    animation: compassRotateCCW 4.5s linear infinite;
+}
+
+.map-loading-mariner .ring-inner {
+    width: 80px;
+    height: 80px;
+    border-width: 1px;
+    border-color: rgba(145, 200, 245, 0.35);
+    box-shadow:
+        0 0 16px rgba(90, 160, 220, 0.25) inset,
+        0 0 18px rgba(90, 160, 220, 0.18);
+    animation: compassPulse 2.4s ease-in-out infinite;
+}
+
+/* 中心指南针指针：北（金）+ 南（蓝）双向箭头 */
+.map-loading-mariner .compass-needle {
+    position: absolute;
+    width: 4px;
+    height: 96px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    transform-origin: 50% 50%;
+    animation: compassNeedle 3.6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.map-loading-mariner .compass-needle::before,
+.map-loading-mariner .compass-needle::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    transform: translateX(-50%);
+}
+
+.map-loading-mariner .compass-needle::before {
+    top: 0;
+    border-bottom: 48px solid #e8c76a;
+    filter: drop-shadow(0 0 6px rgba(232, 199, 106, 0.55));
+}
+
+.map-loading-mariner .compass-needle::after {
+    bottom: 0;
+    border-top: 48px solid #4fa3e3;
+    filter: drop-shadow(0 0 6px rgba(79, 163, 227, 0.45));
+}
+
+/* 中心圆：带缓慢呼吸光，代表导航基点 */
+.map-loading-mariner .compass-core {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, #f0d284 0%, #d4a847 55%, rgba(180, 140, 60, 0.8) 100%);
+    box-shadow:
+        0 0 10px rgba(232, 199, 106, 0.75),
+        0 0 20px rgba(115, 186, 240, 0.35);
+    animation: compassCoreGlow 2s ease-in-out infinite;
+}
+
+@keyframes compassRotateCW {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes compassRotateCCW {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+@keyframes compassPulse {
+    0%, 100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.06);
+    }
+}
+
+@keyframes compassNeedle {
+    0%   { transform: translate(-50%, -50%) rotate(-18deg); }
+    22%  { transform: translate(-50%, -50%) rotate(24deg); }
+    48%  { transform: translate(-50%, -50%) rotate(-12deg); }
+    72%  { transform: translate(-50%, -50%) rotate(30deg); }
+    100% { transform: translate(-50%, -50%) rotate(-18deg); }
+}
+
+@keyframes compassCoreGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 10px rgba(232, 199, 106, 0.65),
+            0 0 20px rgba(115, 186, 240, 0.3);
+    }
+    50% {
+        box-shadow:
+            0 0 16px rgba(232, 199, 106, 0.95),
+            0 0 32px rgba(115, 186, 240, 0.55);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .map-loading-mariner .compass-ring,
+    .map-loading-mariner .compass-needle,
+    .map-loading-mariner .compass-core {
+        animation: none;
+    }
+}

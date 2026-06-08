@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.dynamicDetail.docTitle">侨情动态详情</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .detail-wrap {
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+        .detail-card {
+            width: min(920px, 92vw);
+            padding: 20px;
+            display: grid;
+            gap: 14px;
+        }
+        .detail-title {
+            margin: 0;
+            color: #f3f9ff;
+            font-size: clamp(24px, 3.2vh, 36px);
+        }
+        .detail-meta {
+            color: #8ecfff;
+            font-size: clamp(12px, 1.6vh, 16px);
+        }
+        .detail-content {
+            color: #c5def7;
+            line-height: 1.7;
+            font-size: clamp(14px, 1.8vh, 20px);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .detail-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin: 0;
+        }
+    </style>
+</head>
+<body data-page="dynamic-detail" data-i18n-title="page.dynamicDetail.docTitle">
+    <div class="detail-wrap">
+        <article class="detail-card">
+            <h1 class="detail-title" id="title" data-i18n="page.dynamicDetail.h1">侨情动态详情</h1>
+            <div class="detail-meta" id="meta" data-i18n="dynamicDetail.loadingMeta">加载中...</div>
+            <div class="detail-content" id="content" data-i18n="dynamicDetail.loadingBody">正在读取详情内容...</div>
+            <p class="detail-actions">
+                <a id="externalLink" class="section-back" href="#" target="_blank" rel="noopener noreferrer" data-i18n="dynamic.viewOriginal">查看原文</a>
+                <a class="section-back" href="dynamic.html" data-i18n="dynamicDetail.backList">侨情动态列表</a>
+            </p>
+            <a class="section-back map-screen-back section-topbar-back" href="../index.html" data-i18n="nav.home">返回首页</a>
+        </article>
+    </div>
+    <script src="../date/datasets.data.js"></script>
+    <script src="../js/data-utils.js"></script>
+    <script src="../js/ark-api-config.js"></script>
+    <script src="../js/i18n-secondary-content.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script>I18n.boot();</script>
+    <script src="../js/dynamic-detail.js"></script>
+</body>
+</html>

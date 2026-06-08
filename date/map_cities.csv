@@ -1,0 +1,13 @@
+city_id,city_name,country,region,lat,lon,level
+yulin,玉林,中国,广西,22.63,110.15,origin
+bangkok,曼谷,泰国,东南亚,13.75,100.50,target
+jakarta,雅加达,印度尼西亚,南洋,-6.21,106.85,target
+singapore,新加坡,新加坡,东南亚,1.29,103.85,target
+kuala-lumpur,吉隆坡,马来西亚,东南亚,3.14,101.69,target
+ho-chi-minh,胡志明市,越南,东南亚,10.82,106.63,target
+manila,马尼拉,菲律宾,东南亚,14.60,120.98,target
+phnom-penh,金边,柬埔寨,东南亚,11.56,104.92,target
+yangon,仰光,缅甸,东南亚,16.87,96.20,target
+bandar-seri-begawan,斯里巴加湾市,文莱,东南亚,4.90,114.94,target
+surabaya,泗水,印度尼西亚,南洋,-7.25,112.75,target
+medan,棉兰,印度尼西亚,南洋,3.59,98.67,target

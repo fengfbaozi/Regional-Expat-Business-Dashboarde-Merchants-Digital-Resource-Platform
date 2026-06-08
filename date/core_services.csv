@@ -1,0 +1,13 @@
+id,name,description,page
+svc-006,出海服务助手,提供企业出海流程导航与智能问答服务。,pages/services/overseas-service-assistant.html
+svc-004,多语翻译,覆盖中、英、日、韩、法、德、西、葡、意、俄、阿及东南亚、南亚等主流语种互译。,pages/services/multilingual-translation.html
+svc-002,报价单,快速生成标准化报价单模板。,pages/services/quotation.html
+svc-003,合同模板,"按场景匹配常用合同模板,支持PDF导出。",pages/services/contract-template.html
+svc-005,国别市场分析,该功能仍然在开发中。,pages/services/country-market-analysis.html
+svc-007,侨商资源推荐,该功能仍然在开发中。,pages/services/resource-recommendation.html
+svc-008,政策解读,该功能仍然在开发中。,pages/services/policy-interpretation.html
+svc-009,项目撮合,该功能仍然在开发中。,pages/services/project-matchmaking.html
+svc-010,风险预警,该功能仍然在开发中。,pages/services/risk-alert.html
+svc-011,产业链协同,该功能仍然在开发中。,pages/services/supply-chain-collab.html
+svc-012,海外政策订阅,该功能仍然在开发中。,pages/services/policy-subscription.html
+svc-001,侨乡文化展示,展示侨乡历史、人文和特色资源。,pages/services/culture-showcase.html

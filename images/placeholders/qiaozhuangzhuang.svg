@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="640" viewBox="0 0 480 640" role="img" aria-label="Qiaozhuangzhuang placeholder">
+  <defs>
+    <linearGradient id="qb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b2348"/>
+      <stop offset="100%" stop-color="#060f1f"/>
+    </linearGradient>
+    <linearGradient id="qa" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff0d8"/>
+      <stop offset="100%" stop-color="#c88f45"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="640" fill="url(#qb)"/>
+  <rect x="24" y="24" width="432" height="592" rx="20" fill="none" stroke="#ffc870" stroke-opacity="0.62" stroke-width="2.5"/>
+  <circle cx="240" cy="210" r="72" fill="url(#qa)"/>
+  <rect x="144" y="305" width="192" height="210" rx="96" fill="url(#qa)"/>
+  <text x="240" y="565" text-anchor="middle" fill="#f8e7c0" font-size="26" font-family="Arial, sans-serif">QIAOZHUANGZHUANG</text>
+</svg>

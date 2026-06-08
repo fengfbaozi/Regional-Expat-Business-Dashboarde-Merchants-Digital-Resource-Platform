@@ -1,0 +1,61 @@
+{
+  "_note_1_总体说明": "📌 这是全站 API 配置的唯一入口。改了这个文件，前端 23 个页面和所有 Python 脚本都会自动生效。不需要改任何 JS 代码。",
+  "_note_2_修改后怎么验证": "1. 改完保存文件  2. 刷新浏览器里的 index.html、map.html、overseas-service-assistant.html 三个页面  3. 看到地图能显示、侨壮壮能回复、侨情动态能加载 = 成功",
+  "_note_3_关于豆包智能体": "侨壮壮用的是「豆包智能体」(bots/chat/completions)，不是普通大模型。model 字段填的是豆包后台给的 bot ID，不是 ep-开头的推理接入点。",
+
+  "dataApiKey": "e26a2108-b7e7-4f08-91c3-e4e2c2d17494",
+  "_note_dataApiKey": "【数据获取 Key】用于生成侨情内容、文化资料、翻译回退。火山方舟控制台 → API Key 管理中复制。可以和 qiaozhuangApiKey 用同一个 Key，但如果账号有额度限制建议分开。",
+
+  "translationApiKey": "",
+  "_note_translationApiKey": "【翻译专用 Key】留空 = 自动用上面的 dataApiKey。如果翻译量很大，想单独统计额度，就填另一个 Key。",
+
+  "qiaozhuangApiKey": "5eea5b04-e737-4956-8998-758d86c2e5d5",
+  "_note_qiaozhuangApiKey": "【侨壮壮对话 Key】豆包智能体专用。和上面 dataApiKey 可以是同一个 Key，只要你的账号有 bots/chat/completions 的权限即可。",
+
+  "baiduMapAk": "qmmSTFiY4wTnHNHdaokieBpk15fYxZ1S",
+  "_note_baiduMapAk": "【百度地图 AK】地图页专用。去 lbsyun.baidu.com 控制台创建「浏览器端」应用获取。记得在控制台配置 Referer 白名单，否则地图会显示「无权访问」。",
+
+  "ARK_DATA_CHAT_DEFAULTS": {
+    "_note": "【侨情内容生成】默认参数，一般不用改",
+    "endpoint": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+    "model": "ep-20260403160948-csjkb"
+  },
+
+  "ARK_QIAOZHUANG_DEFAULTS": {
+    "_note": "【侨壮壮豆包智能体】model 字段填 bot ID（bot-开头），不是 ep-开头的推理接入点",
+    "endpoint": "https://ark.cn-beijing.volces.com/api/v3/bots/chat/completions",
+    "model": "bot-20260402185514-nhjkt"
+  },
+
+  "ARK_TRANSLATION_RESPONSES_DEFAULTS": {
+    "_note": "【多语翻译】默认参数，一般不用改",
+    "endpoint": "https://ark.cn-beijing.volces.com/api/v3/responses",
+    "model": "ep-20260407105229-bnn89"
+  },
+
+  "TRANSLATION_ARK": {
+    "_note": "【翻译开关】enabled: true = 开；改成 false 全站就不做翻译了（只显示中文）",
+    "endpoint": "",
+    "model": "",
+    "enabled": true
+  },
+
+  "DATA_ACQUISITION_ARK": {
+    "_note": "【数据生成开关】enabled: true = 开；temperature 越高回答越发散，max_tokens 是最大字数",
+    "endpoint": "",
+    "model": "",
+    "enabled": true,
+    "temperature": 0.35,
+    "max_tokens": 12288,
+    "cacheTtlMs": 600000
+  },
+
+  "ASSISTANT_ARK": {
+    "_note": "【侨壮壮助手开关】use_stream: true = 打字机效果（推荐），false = 整句一起出来",
+    "endpoint": "",
+    "model": "",
+    "use_stream": true
+  },
+
+  "_note_final_安全提醒": "⚠️ 不要把这个文件上传到公开的 GitHub 仓库，它包含密钥。.gitignore 已包含它，只在本地保存。"
+}

@@ -1,0 +1,22 @@
+[
+  { "featureType": "background", "elementType": "geometry", "stylers": { "visibility": "on" } },
+  { "featureType": "land", "elementType": "geometry", "stylers": { "color": "#051022ff", "visibility": "on" } },
+  { "featureType": "building", "elementType": "geometry.fill", "stylers": { "color": "#000413ff", "visibility": "on" } },
+  { "featureType": "road", "elementType": "geometry.fill", "stylers": { "color": "#ffc870ff", "visibility": "on", "opacity": "ff" } },
+  { "featureType": "road", "elementType": "geometry.stroke", "stylers": { "color": "#ffe19cff", "visibility": "on" } },
+  { "featureType": "water", "elementType": "geometry", "stylers": { "color": "#0b2b55ff", "visibility": "on" } },
+  { "featureType": "country", "elementType": "labels.text.fill", "stylers": { "color": "#2b2933ff", "visibility": "on", "weight": 10 } },
+  { "featureType": "districtlabel", "elementType": "labels.text.fill", "stylers": { "color": "#ffc870ff", "visibility": "on", "weight": 20 } },
+  { "featureType": "districtlabel", "elementType": "labels.text.stroke", "stylers": { "color": "#ffc870ff", "visibility": "on", "weight": 0.5 } },
+  { "featureType": "poilabel", "elementType": "labels.icon", "stylers": { "visibility": "off" } },
+  { "featureType": "scenicspotslabel", "elementType": "labels.icon", "stylers": { "visibility": "off" } },
+  { "featureType": "transportationlabel", "elementType": "labels.icon", "stylers": { "visibility": "off" } },
+  { "featureType": "airportlabel", "elementType": "labels.icon", "stylers": { "visibility": "off" } },
+  { "featureType": "green", "elementType": "geometry", "stylers": { "color": "#20222dff", "visibility": "on" } },
+  { "featureType": "city", "elementType": "labels.text.stroke", "stylers": { "color": "#e68a2dff", "visibility": "on" } },
+  { "featureType": "country", "elementType": "labels.text.stroke", "stylers": { "color": "#ffc870ff", "visibility": "on", "weight": 0.5 } },
+  { "featureType": "road", "elementType": "labels.text.fill", "stylers": { "color": "#e6f0ffff", "visibility": "on" } },
+  { "featureType": "road", "elementType": "labels.text.stroke", "stylers": { "color": "#ffd799ff", "weight": 1.5, "visibility": "on" } },
+  { "featureType": "railway", "elementType": "geometry", "stylers": { "visibility": "off" } },
+  { "featureType": "subway", "elementType": "geometry", "stylers": { "visibility": "off" } }
+]

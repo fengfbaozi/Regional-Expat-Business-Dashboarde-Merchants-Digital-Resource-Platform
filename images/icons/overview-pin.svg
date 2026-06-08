@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="pn-g" x1="14" y1="9" x2="26" y2="33" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff2d0"/>
+      <stop offset="0.5" stop-color="#e0a040"/>
+      <stop offset="1" stop-color="#7a4810"/>
+    </linearGradient>
+    <filter id="pn-f" x="-22%" y="-22%" width="144%" height="144%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.8" result="b"/>
+      <feOffset dx="0" dy="1.4" in="b" result="o"/>
+      <feFlood flood-color="#b87828" flood-opacity="0.35"/>
+      <feComposite in2="o" operator="in"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <ellipse cx="20" cy="34.2" rx="5.5" ry="1.1" stroke="url(#pn-g)" stroke-width="0.45" opacity="0.35"/>
+  <circle cx="20" cy="17.5" r="10.2" stroke="url(#pn-g)" stroke-width="0.5" stroke-dasharray="1.4 2" opacity="0.4"/>
+  <circle cx="20" cy="17.5" r="7.8" stroke="url(#pn-g)" stroke-width="0.45" stroke-dasharray="1 1.8" opacity="0.35"/>
+  <g filter="url(#pn-f)">
+    <path d="M20 34.5s9.2-7.4 9.2-14.7a9.2 9.2 0 10-18.4 0c0 7.3 9.2 14.7 9.2 14.7z" stroke="url(#pn-g)" stroke-width="1.4" stroke-linejoin="round"/>
+  </g>
+  <circle cx="20" cy="17.2" r="3.4" stroke="url(#pn-g)" stroke-width="0.65" opacity="0.55"/>
+  <circle cx="20" cy="17.2" r="1.85" stroke="#7ee0ff" stroke-width="1.1"/>
+  <circle cx="20" cy="17.2" r="0.55" fill="#b8f0ff" opacity="0.85"/>
+  <path d="M14.5 33.5h11" stroke="#7ec8ff" stroke-width="0.4" stroke-linecap="round" opacity="0.45"/>
+  <path d="M20 31.5v2.2M17.2 33.5h5.6" stroke="#7ec8ff" stroke-width="0.35" stroke-linecap="round" opacity="0.4"/>
+</svg>

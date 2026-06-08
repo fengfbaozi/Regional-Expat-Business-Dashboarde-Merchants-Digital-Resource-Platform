@@ -1,0 +1,150 @@
+{
+  "module": "qiaoxiang_people",
+  "title": "侨胞故事 / 侨商风采",
+  "updatedAt": "2026-04-12",
+  "items": [
+    {
+      "id": "qiaobao_lizhiwen",
+      "name": "李治稳",
+      "native_place": "广西玉林容县",
+      "native_place_short": "容县",
+      "country": "马来西亚",
+      "identity": ["侨领", "侨商"],
+      "organization": "马来西亚广西总会",
+      "title": "总会长",
+      "summary": "容县籍侨领，任马来西亚广西总会总会长、马来西亚桂商总会副会长，推动马桂乡团联谊与回乡交流。",
+      "story": "公开报道显示，其于2020年当选马来西亚广西总会总会长，关注属会会务与乡团发展；多次应邀参与广西侨乡活动，与容县等地开展联谊。长期致力于团结马来西亚广西乡亲、促进与祖籍国经贸文化交流。",
+      "photo": {
+        "local": "images/placeholders/generic-placeholder.svg",
+        "remote": "",
+        "alt": "李治稳人物照片"
+      },
+      "sources": [
+        {
+          "title": "马来西亚广西总会举行理事复选 李治稳当选总会长（东南网马来西亚站）",
+          "url": "http://my.fjsen.com/2020-12/16/content_30578011.htm"
+        },
+        {
+          "title": "侨乡容县“三月三”山歌播全球 海内外同频共建新侨乡（中新网广西，活动报道列名）",
+          "url": "https://www.gx.chinanews.com.cn/gatq/2023-04-21/detail-ihcnrtzv5403628.shtml"
+        }
+      ],
+      "source_note": "会长职务与容县侨乡活动参与见公开报道交叉印证。",
+      "status": "verified"
+    },
+    {
+      "id": "qiaobao_lizhenchang",
+      "name": "李振昌",
+      "native_place": "广西玉林容县",
+      "native_place_short": "容县",
+      "country": "美国",
+      "identity": ["侨商", "慈善人士"],
+      "organization": "美国JMT集团公司",
+      "title": "董事长",
+      "summary": "美籍华人、容县籍侨商，长期捐资支持容县及广西教育事业，关注家乡人才培养。",
+      "story": "据公开报道，其毕业于广西大学农学院后赴美深造，从事分析检测与相关产业；多次向容县高中等捐资助学，表示愿将更多精力投入慈善与公益。事迹见中国侨网对容县捐资助学等报道。",
+      "photo": {
+        "local": "images/placeholders/generic-placeholder.svg",
+        "remote": "",
+        "alt": "李振昌人物照片"
+      },
+      "sources": [
+        {
+          "title": "美籍华人李振昌为广西容县高中捐资助学（中国侨网）",
+          "url": "http://www.chinaqw.com/gqqj/2017/02-16/126952.shtml"
+        },
+        {
+          "title": "美国侨商李振昌返乡助学：将把后半生投入慈善事业（中国侨网）",
+          "url": "http://www.chinaqw.com/jjkj/2017/02-14/126381.shtml"
+        }
+      ],
+      "source_note": "籍贯容县与捐资助学事迹见中国侨网多篇报道。",
+      "status": "verified"
+    },
+    {
+      "id": "qiaobao_mazhenrong",
+      "name": "马振荣",
+      "native_place": "广西玉林容县",
+      "native_place_short": "容县",
+      "country": "泰国",
+      "identity": ["侨领", "侨商"],
+      "organization": "星光国际贸易公司等",
+      "title": "泰国广西总会名誉主席（公开报道线索）",
+      "summary": "泰国华商，祖籍容县，参与泰国广西同乡社团与经贸活动，推动泰桂交流合作。",
+      "story": "据侨务公开报道线索，其祖籍广西容县，在泰国从事商贸并参与广西同乡社团事务。具体职务与企业信息建议在泰国广西总会及权威侨情名录中再行核对补全。",
+      "photo": {
+        "local": "images/placeholders/generic-placeholder.svg",
+        "remote": "",
+        "alt": "马振荣人物照片"
+      },
+      "sources": [
+        {
+          "title": "广西侨务代表团访问泰国广西总会等活动报道（背景资料，待与人物专稿核对）",
+          "url": "http://www.chinaqw.com/gqqj/2016/07-08/94636.shtml"
+        }
+      ],
+      "source_note": "职务与事迹据内部采集说明与公开侨务新闻线索整理，尚缺独立人物专访类第二来源，建议人工补核。",
+      "status": "partial"
+    },
+    {
+      "id": "qiaobao_fengjiazheng",
+      "name": "封家正",
+      "native_place": "广西玉林容县",
+      "native_place_short": "容县",
+      "country": "泰国",
+      "identity": ["侨商"],
+      "organization": "泰国隆发盛企业有限公司（公开报道线索）",
+      "title": "企业负责人",
+      "summary": "泰国容县籍侨商，参与经贸与回乡交流，推动泰中商贸与侨乡联系。",
+      "story": "据公开线索整理，其在泰国经营企业并关心容县发展。具体项目与投资额未在条目中展开，需以政府招商与权威媒体报道为准再行核实，避免夸大表述。",
+      "photo": {
+        "local": "images/placeholders/generic-placeholder.svg",
+        "remote": "",
+        "alt": "封家正人物照片"
+      },
+      "sources": [],
+      "source_note": "公开可检索独立报道不足，条目保留为待核线索；请补充权威新闻或侨团公开页后再标为 verified。",
+      "status": "partial"
+    },
+    {
+      "id": "qiaobao_xiezhan",
+      "name": "谢战",
+      "native_place": "广西玉林北流市",
+      "native_place_short": "北流",
+      "country": "柬埔寨",
+      "identity": ["侨商", "企业家"],
+      "organization": "柬埔寨投资企业（专业市场等领域，公开线索）",
+      "title": "投资人",
+      "summary": "北流籍华商，在柬埔寨开展投资与市场类项目，参与桂柬经贸与侨乡交流。",
+      "story": "据采集说明，其为北流市塘岸镇人，在柬投资专业市场等项目。具体企业名称与规模需以商务备案或权威报道为准，建议后续补全来源链接与照片。",
+      "photo": {
+        "local": "images/placeholders/generic-placeholder.svg",
+        "remote": "",
+        "alt": "谢战人物照片"
+      },
+      "sources": [],
+      "source_note": "待补充北流侨办、权威媒体对人物与项目的公开报道链接。",
+      "status": "partial"
+    },
+    {
+      "id": "qiaobao_zhongxian",
+      "name": "钟献",
+      "native_place": "广西玉林陆川县",
+      "native_place_short": "陆川",
+      "country": "柬埔寨",
+      "identity": ["侨商", "企业家"],
+      "organization": "柬埔寨涉农商贸企业（公开线索）",
+      "title": "企业负责人",
+      "summary": "陆川籍华商，在柬埔寨从事农资、中药材及相关产业经营，服务农业与贸易合作。",
+      "story": "据采集说明，其为陆川县马坡镇人，在柬开展中药材、化肥及农业相关产业。具体企业信息与公开报道尚待补全，建议与商务主管部门或权威媒体信息交叉核对。",
+      "photo": {
+        "local": "images/placeholders/generic-placeholder.svg",
+        "remote": "",
+        "alt": "钟献人物照片"
+      },
+      "sources": [],
+      "source_note": "待补充独立公开报道或政府活动通稿来源。",
+      "status": "partial"
+    }
+  ]
+}

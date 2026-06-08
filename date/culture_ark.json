@@ -1,0 +1,123 @@
+{
+  "history": [
+    {
+      "year": "明万历年间（1573-1620）",
+      "event": "玉林籍民众因生计所迫，开始漂洋过海前往东南亚谋生，开启玉林侨史开端",
+      "image": "images/history/ming-wanli.svg"
+    },
+    {
+      "year": "清光绪二十一年（1895）",
+      "event": "玉林籍侨胞在新加坡成立玉林会馆，成为海外侨胞联络乡情、互助共济的重要平台",
+      "image": "images/history/qing-guangxu.svg"
+    },
+    {
+      "year": "民国10年（1921）",
+      "event": "玉林籍侨商集资捐资，修建玉林至容县公路，改善家乡交通条件",
+      "image": "images/history/min-guo10.svg"
+    },
+    {
+      "year": "1949年",
+      "event": "新中国成立后，大批玉林籍侨胞响应号召回国，投身家乡工农业建设",
+      "image": "images/history/1949.svg"
+    },
+    {
+      "year": "1985年",
+      "event": "玉林地区归国华侨联合会正式成立，搭建起侨胞与家乡沟通的桥梁",
+      "image": "images/history/1985.svg"
+    },
+    {
+      "year": "2000年",
+      "event": "玉林市举办首届侨乡文化节，集中展示侨乡文化特色与侨胞贡献",
+      "image": "images/history/2000.svg"
+    },
+    {
+      "year": "2015年",
+      "event": "玉林华侨博物馆建成开馆，收藏展示侨史文物、银信资料等近千件",
+      "image": "images/history/2015.svg"
+    },
+    {
+      "year": "2023年",
+      "event": "玉林市获批国家级侨乡文化交流基地，推动侨乡文化对外传播与交流",
+      "image": "images/history/2023.svg"
+    }
+  ],
+  "figures": [
+    {
+      "name": "陈济桓",
+      "title": "抗日爱国侨胞、国民党陆军中将",
+      "story": "早年赴南洋谋生，抗战爆发后毅然回国参军，1944年桂林保卫战中身负重伤，自戕殉国，壮烈牺牲",
+      "tag": "侨胞故事",
+      "image": "images/figures/chenjihuan.svg"
+    },
+    {
+      "name": "李汉魂",
+      "title": "民国时期军政要员、爱国侨胞",
+      "story": "祖籍玉林容县，曾赴海外联络侨胞筹集抗战物资，战后捐资在家乡创办学校，推动教育发展",
+      "tag": "侨胞故事",
+      "image": "images/figures/lihanhun.svg"
+    },
+    {
+      "name": "陈智雄",
+      "title": "印尼知名侨商、玉林侨商会会长",
+      "story": "上世纪90年代回国投资，创办多家制造业企业，带动家乡就业，同时热心公益，捐资建设乡村基础设施",
+      "tag": "侨商风采",
+      "image": "images/figures/chenzhixiong.svg"
+    },
+    {
+      "name": "梁胜",
+      "title": "美国玉林商会创始人、海外侨领",
+      "story": "在美国创办玉林商会，团结当地侨胞，多次组织侨团回乡考察交流，促进中美经贸与文化合作",
+      "tag": "侨胞故事",
+      "image": "images/figures/liangsheng.svg"
+    },
+    {
+      "name": "黄玉英",
+      "title": "马来西亚侨胞、公益慈善家",
+      "story": "旅居马来西亚多年，累计捐资超千万元在家乡建设中小学、养老院，资助贫困学生完成学业",
+      "tag": "侨胞故事",
+      "image": "images/figures/huangyuying.svg"
+    }
+  ],
+  "stories": [
+    {
+      "title": "《南洋银信里的乡愁》",
+      "role": "海外侨胞与家乡侨眷",
+      "period": "清末民初至建国初期",
+      "story": "玉林侨胞远赴南洋后，通过银信（侨批）给家乡寄钱寄信，信中既有对亲人的思念，也讲述海外谋生的艰辛，银信成为连接侨胞与家乡的情感纽带",
+      "highlight": "承载侨乡情感的‘活化石’银信文化",
+      "image": "images/stories/yinxin.svg"
+    },
+    {
+      "title": "《会馆里的乡音传承》",
+      "role": "海外玉林会馆侨胞",
+      "period": "民国至今",
+      "story": "海外玉林会馆不仅是侨胞互助的场所，更是传承玉林方言、年俗、饮食文化的阵地，每逢春节，侨胞们会在会馆举办玉林特色的舞狮、年例活动，留住乡音乡情",
+      "highlight": "海外侨胞的‘精神家园’",
+      "image": "images/stories/huiguan.svg"
+    },
+    {
+      "title": "《侨资兴学的百年佳话》",
+      "role": "侨商与家乡师生",
+      "period": "改革开放以来",
+      "story": "众多玉林籍侨商捐资在家乡建设中小学、职业院校，如容县杨梅中学、玉林华侨中学等，为家乡培养了大批人才",
+      "highlight": "侨胞反哺教育的典范",
+      "image": "images/stories/qiaozixuexiao.svg"
+    },
+    {
+      "title": "《玉林舞狮的跨境传承》",
+      "role": "侨胞与民间艺人",
+      "period": "当代",
+      "story": "玉林侨胞将本土舞狮技艺带到东南亚、欧美等地，同时融合当地文化元素创新舞狮形式，近年又将海外创新的舞狮表演带回家乡，实现文化双向交流",
+      "highlight": "侨乡文化的对外传播与创新",
+      "image": "images/stories/wushi.svg"
+    },
+    {
+      "title": "《侨眷后代的侨史挖掘》",
+      "role": "侨眷后代与文史研究者",
+      "period": "2010年至今",
+      "story": "玉林侨眷后代自发收集祖辈的银信、家书、老照片，联合文史部门整理侨史资料，举办侨史展览，让更多人了解玉林侨乡的发展历程",
+      "highlight": "侨乡文化的代际传承",
+      "image": "images/stories/qiaoshi.svg"
+    }
+  ]
+}

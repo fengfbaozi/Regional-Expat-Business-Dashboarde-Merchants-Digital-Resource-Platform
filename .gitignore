@@ -1,0 +1,15 @@
+# 本地密钥覆盖（勿提交）
+date/ark-api.local.json
+
+# 本机 / IDE（不纳入版本与打包分发时可删）
+.venv/
+.idea/
+.vscode/
+.cursor/
+*.log
+
+# 视频转换临时帧
+.tmp_qiaozhuang_idle/
+
+# 预打包输出
+dist/

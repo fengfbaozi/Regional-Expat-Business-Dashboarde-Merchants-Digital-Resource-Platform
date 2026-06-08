@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "title": "广西侨商商业活动报价模板",
+    "currency": "CNY",
+    "defaultTaxRate": 6,
+    "cities": ["南宁", "玉林", "北海", "防城港", "崇左", "桂林", "柳州", "钦州"]
+  },
+  "templates": [
+    {
+      "id": "investment_matchmaking",
+      "name": "侨商投资对接会",
+      "description": "适用于侨商招商推介、项目路演、政企对接、园区考察前后配套会务。",
+      "remarks": [
+        "本报价适用于广西侨商投资对接与项目推介活动。",
+        "场地、物料与接待可根据城市和会场级别微调。",
+        "最终报价以确认执行清单与实际档期为准。"
+      ],
+      "items": [
+        {"name": "会务策划与执行统筹", "unit": "场", "price": 6800, "calcMode": "fixed", "qty": 1},
+        {"name": "会场布置与签到导视", "unit": "套", "price": 5200, "calcMode": "fixed", "qty": 1},
+        {"name": "茶歇与基础接待", "unit": "人", "price": 68, "calcMode": "per_person", "minQty": 20},
+        {"name": "摄影摄像记录", "unit": "天", "price": 2800, "calcMode": "per_day"},
+        {"name": "双语主持/商务翻译", "unit": "天", "price": 3200, "calcMode": "per_day"},
+        {"name": "宣传海报与会场主视觉", "unit": "套", "price": 2600, "calcMode": "fixed", "qty": 1}
+      ]
+    },
+    {
+      "id": "industry_tour",
+      "name": "广西特色产业考察团",
+      "description": "适用于侨商来桂考察香料、中医药、轻工制造、商贸物流、园区项目等活动。",
+      "remarks": [
+        "本报价适用于广西特色产业考察、企业走访、园区参访等商务活动。",
+        "交通、住宿与餐饮可按接待标准升级或下调。",
+        "若跨城市联动，建议单独增加车辆与行程协调预算。"
+      ],
+      "items": [
+        {"name": "考察线路策划", "unit": "项", "price": 4200, "calcMode": "fixed", "qty": 1},
+        {"name": "商务接待与联络协调", "unit": "天", "price": 2600, "calcMode": "per_day"},
+        {"name": "车辆接驳与行程保障", "unit": "天", "price": 3600, "calcMode": "per_day"},
+        {"name": "随行商务翻译", "unit": "天", "price": 3000, "calcMode": "per_day"},
+        {"name": "参访资料包与胸牌", "unit": "人", "price": 35, "calcMode": "per_person", "minQty": 10},
+        {"name": "摄影记录与活动快剪", "unit": "天", "price": 3000, "calcMode": "per_day"}
+      ]
+    },
+    {
+      "id": "cross_border_reception",
+      "name": "跨境商务接待服务",
+      "description": "适用于面向东盟方向的来访接待、商贸洽谈、翻译陪同与行程组织。",
+      "remarks": [
+        "本报价适用于跨境商务来访接待、口岸交流、商务洽谈等活动。",
+        "如需增加多语种翻译、外宾接待礼品或跨市安排，可另行追加。",
+        "最终执行以确认后的日程单与服务边界为准。"
+      ],
+      "items": [
+        {"name": "来访日程策划", "unit": "项", "price": 3500, "calcMode": "fixed", "qty": 1},
+        {"name": "商务陪同服务", "unit": "天", "price": 2400, "calcMode": "per_day"},
+        {"name": "口译 / 陪同翻译", "unit": "天", "price": 3600, "calcMode": "per_day"},
+        {"name": "接送站与交通协调", "unit": "天", "price": 1800, "calcMode": "per_day"},
+        {"name": "商务简餐与茶歇", "unit": "人", "price": 88, "calcMode": "per_person", "minQty": 6},
+        {"name": "资料整理与纪要输出", "unit": "项", "price": 1800, "calcMode": "fixed", "qty": 1}
+      ]
+    }
+  ]
+}

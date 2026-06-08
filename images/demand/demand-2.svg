@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="Demand placeholder 2">
+  <defs><linearGradient id="d2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0e4d95"/><stop offset="100%" stop-color="#081f46"/></linearGradient></defs>
+  <rect width="240" height="240" fill="url(#d2)"/>
+  <rect x="44" y="52" width="152" height="136" rx="16" fill="#7ed4ff" fill-opacity="0.85"/>
+  <path d="M44 170L92 128L124 150L164 120L196 150V188H44Z" fill="#1f77cf"/>
+</svg>

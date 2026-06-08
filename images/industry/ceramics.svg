@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="220" viewBox="0 0 300 220" role="img" aria-label="Ceramics industry">
+  <rect width="300" height="220" fill="#356fa8"/>
+  <ellipse cx="150" cy="94" rx="72" ry="34" fill="#8ac3e7"/>
+  <rect x="98" y="92" width="104" height="64" rx="14" fill="#6fb1dd"/>
+  <text x="150" y="202" text-anchor="middle" fill="#e9f7ff" font-size="24" font-family="Arial, sans-serif">CERAMICS</text>
+</svg>

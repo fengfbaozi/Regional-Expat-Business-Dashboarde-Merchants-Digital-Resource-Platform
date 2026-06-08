@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地图板块 - 二级页面</title>
+    <link rel="preconnect" href="https://api.map.baidu.com">
+    <link rel="dns-prefetch" href="//api.map.baidu.com">
+    <link rel="preconnect" href="https://online0.map.bdimg.com">
+    <link rel="preconnect" href="https://online1.map.bdimg.com">
+    <link rel="preconnect" href="https://webmap0.map.bdstatic.com">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="map-explorer" class="map-page-screen" data-i18n-title="page.map.title">
+    <div class="map-stage">
+        <a class="map-screen-back" href="../index.html" data-i18n="page.map.back">返回首页</a>
+        <section class="map-explorer map-explorer-fullscreen" id="mapExplorer">
+            <aside class="map-tool-panel map-tool-left" id="leftPanel">
+                <button class="panel-toggle" type="button" id="leftToggle" data-i18n-aria-label="map.toggle.left">◀</button>
+                <h2 data-i18n="map.filter.heading">区域筛选</h2>
+                <div class="map-filter-row">
+                    <label for="cityFilter" data-i18n="map.filter.cityLb">目标城市</label>
+                    <select id="cityFilter">
+                        <option value="" data-i18n="map.filter.cityPh">请选择城市</option>
+                    </select>
+                </div>
+                <div class="map-filter-row">
+                    <label for="typeFilter" data-i18n="map.filter.typeLb">侨商类别</label>
+                    <select id="typeFilter">
+                        <option value="" data-i18n="map.filter.typePh">全部类型</option>
+                    </select>
+                </div>
+                <div class="map-filter-row">
+                    <label for="countryFilter" data-i18n="map.filter.countryLb">国家/地区</label>
+                    <select id="countryFilter">
+                        <option value="" data-i18n="map.filter.countryPh">全部国家/地区</option>
+                    </select>
+                </div>
+                <div class="map-filter-row">
+                    <label for="keywordFilter" data-i18n="map.filter.keywordLb">关键词检索</label>
+                    <input id="keywordFilter" type="text" data-i18n-placeholder="map.filter.keywordPh" placeholder="姓名/城市/描述">
+                </div>
+                <div class="map-filter-row">
+                    <button class="reset-filter-btn" type="button" id="resetFilters" data-i18n="map.filter.reset">重置选择</button>
+                </div>
+                <div class="map-filter-stats" id="filterStats">
+                    <span>可视城市：0</span>
+                    <span>匹配侨商：0</span>
+                    <span>匹配侨企：0</span>
+                </div>
+            </aside>
+
+            <div class="map-explorer-canvas">
+                <div class="map-loading-mask" id="mapLoadingMask" aria-hidden="true">
+                    <div class="map-loading-mariner" aria-hidden="true">
+                        <div class="compass-ring ring-outer"></div>
+                        <div class="compass-ring ring-mid"></div>
+                        <div class="compass-ring ring-inner"></div>
+                        <div class="compass-needle"></div>
+                        <div class="compass-core"></div>
+                    </div>
+                </div>
+                <div id="baiduMap" class="baidu-map-container" data-i18n-aria-label="map.aria.canvas"></div>
+                <div class="map-tone-layer map-tone-blue" aria-hidden="true"></div>
+                <div class="map-tone-layer map-tone-gold" aria-hidden="true"></div>
+                <div class="map-starfield" aria-hidden="true"></div>
+                <div class="map-bottom-strip-mask" aria-hidden="true"></div>
+                <div class="map-bottom-strip" aria-label="地图快捷工具">
+                    <a href="../index.html" class="map-strip-link" data-i18n="map.strip.home">首页</a>
+                    <a href="core-services.html" class="map-strip-link" data-i18n="map.strip.core">核心服务</a>
+                    <button id="stripZoomInBtn" type="button" class="map-strip-btn" data-i18n="map.strip.zoomIn">放大</button>
+                    <button id="stripZoomOutBtn" type="button" class="map-strip-btn" data-i18n="map.strip.zoomOut">缩小</button>
+                    <button id="resetMapViewBtn" type="button" class="map-strip-btn" data-i18n="map.strip.resetView">默认视角</button>
+                </div>
+            </div>
+
+            <aside class="map-tool-panel map-tool-right" id="rightPanel">
+                <button class="panel-toggle panel-toggle-right" type="button" id="rightToggle" data-i18n-aria-label="map.toggle.right">▶</button>
+                <h2 data-i18n="map.list.heading">侨商名录</h2>
+                <div class="map-selected-city" id="selectedCityText">当前城市：请选择</div>
+                <div class="merchant-stats" id="merchantStats">
+                    <span>当地侨商总数：0</span>
+                    <span>侨企个数：0</span>
+                </div>
+                <div class="merchant-list" id="merchantList"></div>
+            </aside>
+        </section>
+    </div>
+    <script src="../date/datasets.data.js"></script>
+    <script src="../js/data-utils.js"></script>
+    <script src="../js/map-preload.js"></script>
+    <script src="../js/ark-api-config.js"></script>
+    <script src="../js/baidu-map-sdk-inject.js"></script>
+    <script src="../js/i18n-secondary-content.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script>I18n.boot();</script>
+    <script src="../js/map-shared.js"></script>
+    <script src="../js/map-mid-layer.js"></script>
+    <script src="../js/page-map.js"></script>
+</body>
+</html>

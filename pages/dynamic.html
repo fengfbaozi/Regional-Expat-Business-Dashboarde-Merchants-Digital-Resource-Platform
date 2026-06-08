@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>侨情动态 - 资讯卡片</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="dynamic" data-i18n-title="page.dynamic.title">
+    <main class="section-shell section-shell--dynamic-news">
+        <header class="dynamic-page-head">
+            <a class="section-back map-screen-back section-topbar-back" href="../index.html" data-i18n="nav.home">返回首页</a>
+            <div class="dynamic-page-head-center">
+                <h1 class="section-title section-topbar-title" data-i18n="page.dynamic.title">侨情动态</h1>
+            </div>
+        </header>
+        <div class="dynamic-news-scroll" id="dynamicNewsScroll">
+            <section class="section-grid qiaowu-news-grid" id="pageContent"></section>
+        </div>
+        <div class="dynamic-refresh-ui" id="dynamicRefreshUi">
+            <span class="dynamic-refresh-hint" id="dynamicRefreshHint" aria-live="polite"></span>
+            <button type="button" class="dynamic-json-refresh" id="dynamicRefreshBtn" data-i18n-tooltip="page.dynamic.refreshTitle" data-i18n="page.dynamic.refresh">刷新</button>
+        </div>
+    </main>
+    <script src="../date/datasets.data.js"></script>
+    <script src="../js/data-utils.js"></script>
+    <script src="../js/ark-api-config.js"></script>
+    <script src="../js/platform-data-api-config.js"></script>
+    <script src="../js/qiaowu-news-loader.js"></script>
+    <script src="../js/i18n-secondary-content.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script>I18n.boot();</script>
+    <script src="../js/page-sections.js"></script>
+</body>
+</html>

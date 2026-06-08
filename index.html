@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-i18n-root>
+<head>
+    <meta charset="UTF-8">
+    <title>玉林侨务数字平台</title>
+    <link rel="dns-prefetch" href="https://api.map.baidu.com">
+    <link rel="preconnect" href="https://api.map.baidu.com">
+    <link rel="preconnect" href="https://online0.map.bdimg.com">
+    <link rel="preconnect" href="https://online1.map.bdimg.com">
+    <link rel="preconnect" href="https://webmap0.map.bdstatic.com">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home-ui-enhance.css">
+</head>
+<body class="page-home" data-i18n-title="home.title">
+
+<div class="main-bg" aria-hidden="true"></div>
+
+<div class="header">
+    <a class="brand-logo" href="index.html" data-i18n="home.brand" data-i18n-attr="aria-label" aria-label="玉林师范学院标识">
+        <img src="images/brand/ylnu-emblem.png" alt="校徽标识" class="brand-logo-crop" data-i18n="home.logoAlt" data-i18n-attr="alt">
+    </a>
+    <div class="header-meta" id="headerMeta">
+        <span class="meta-item"><span class="meta-icon" aria-hidden="true"><img src="images/icons/meta-calendar.svg" width="16" height="16" alt=""></span><span id="localDateText">--</span></span>
+        <span class="meta-item"><span class="meta-icon" aria-hidden="true"><img src="images/icons/meta-weather.svg" width="16" height="16" alt=""></span><span id="localWeatherText">--</span></span>
+        <span class="meta-lang-host" id="headerLangSlot"></span>
+    </div>
+    <h1 data-i18n="home.title">玉林侨务数字平台</h1>
+</div>
+
+<div class="data-overview-panel"></div>
+
+<div class="main-container">
+
+    <div class="left-panel">
+        <div class="panel dynamic">
+            <h2 data-i18n="panel.news">侨情动态</h2>
+            <p data-i18n="ui.loadingText">加载中...</p>
+        </div>
+        <div class="panel demand">
+            <h2 data-i18n="panel.demand">侨务需求</h2>
+            <p data-i18n="ui.loadingText">加载中...</p>
+        </div>
+    </div>
+
+    <div class="center-panel">
+        <div class="map-panel home-map-panel" id="homeMapPanel">
+            <span class="home-glass-edge" aria-hidden="true"></span>
+            <span class="home-glass-particles" aria-hidden="true"></span>
+            <div class="map-loading-mask" id="homeMapLoadingMask" aria-hidden="true">
+                <div class="map-loading-mariner" aria-hidden="true">
+                    <div class="compass-ring ring-outer"></div>
+                    <div class="compass-ring ring-mid"></div>
+                    <div class="compass-ring ring-inner"></div>
+                    <div class="compass-needle"></div>
+                    <div class="compass-core"></div>
+                </div>
+            </div>
+            <div id="homeBaiduMap" class="baidu-map-container" data-i18n="home.mapPlaque" data-i18n-attr="aria-label" aria-label="侨情地图"></div>
+            <div class="map-tone-layer map-tone-blue" aria-hidden="true"></div>
+            <div class="map-tone-layer map-tone-gold" aria-hidden="true"></div>
+            <div class="map-starfield" aria-hidden="true"></div>
+            <span class="home-map-plaque" role="heading" aria-level="2" data-i18n="home.mapPlaque">侨情地图</span>
+            <a href="pages/map.html" class="map-panel-link-cover" data-i18n="home.mapLink" data-i18n-attr="aria-label" aria-label="进入地图板块"></a>
+        </div>
+        <div class="bottom-nav industry-board">
+            <div class="industry-title" data-i18n="home.industryStrip">侨乡特色产业展示</div>
+            <div class="industry-grid"></div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <div class="panel core-services">
+            <h2 data-i18n="panel.core">核心服务</h2>
+            <p data-i18n="ui.loadingText">加载中...</p>
+        </div>
+        <div class="digital-human-slot">
+            <video
+                src="images/brand/qiaozhuang-mascot-loop.webm"
+                poster="images/brand/qiaozhuang-mascot-loop-poster.png"
+                autoplay
+                loop
+                muted
+                playsinline
+                class="digital-human"
+            ></video>
+        </div>
+    </div>
+</div>
+<script src="js/ark-api-config.js"></script>
+<script src="js/baidu-map-sdk-inject.js"></script>
+<script src="js/i18n-secondary-content.js"></script>
+<script src="js/i18n.js"></script>
+<script src="date/datasets.data.js"></script>
+<script src="js/data-utils.js"></script>
+<script src="js/map-preload.js"></script>
+<script src="js/platform-data-api-config.js"></script>
+<script src="js/qiaowu-news-loader.js"></script>
+<script src="js/map-shared.js"></script>
+    <script src="js/map-mid-layer.js"></script>
+<script src="js/main.js"></script>
+<script src="js/home-ui-enhance.js"></script>
+</body>
+</html>

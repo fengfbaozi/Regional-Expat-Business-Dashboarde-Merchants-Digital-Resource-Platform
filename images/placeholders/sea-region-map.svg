@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" role="img" aria-label="Asia and surrounding map with Yulin center">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d274c"/>
+      <stop offset="100%" stop-color="#061428"/>
+    </linearGradient>
+    <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#143a65"/>
+      <stop offset="100%" stop-color="#0f2b4d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1400" height="820" fill="url(#bg)"/>
+  <g opacity="0.14" stroke="#ffc870" stroke-width="1">
+    <path d="M0 110H1400M0 220H1400M0 330H1400M0 440H1400M0 550H1400M0 660H1400M0 770H1400"/>
+    <path d="M120 0V820M240 0V820M360 0V820M480 0V820M600 0V820M720 0V820M840 0V820M960 0V820M1080 0V820M1200 0V820M1320 0V820"/>
+  </g>
+  <path d="M170 190L350 130L560 180L760 150L930 180L1090 250L1130 360L1050 440L890 460L760 500L700 620L560 640L420 570L320 470L180 390L140 290Z" fill="url(#land)" opacity="0.92"/>
+  <path d="M780 500L860 540L900 610L860 670L770 650L730 590Z" fill="url(#land)"/>
+  <path d="M910 525L1060 545L1040 600L900 585Z" fill="url(#land)"/>
+  <path d="M1060 480L1180 470L1210 520L1130 570L1040 550Z" fill="url(#land)" opacity="0.88"/>
+  <path d="M750 320L820 290L870 330L850 380L790 400L740 360Z" fill="url(#land)"/>
+  <g fill="#f8e7c0" font-family="Arial, sans-serif" font-size="22">
+    <text x="86" y="70">亚洲及周边区域示意图（玉林为中心）</text>
+  </g>
+  <g stroke="#ffc870" stroke-width="1.8" fill="#fff0d8">
+    <circle cx="628" cy="448" r="7"/>
+    <circle cx="610" cy="370" r="5"/>
+    <circle cx="680" cy="410" r="5"/>
+    <circle cx="740" cy="355" r="5"/>
+    <circle cx="780" cy="320" r="5"/>
+    <circle cx="835" cy="350" r="5"/>
+    <circle cx="890" cy="530" r="5"/>
+    <circle cx="930" cy="585" r="5"/>
+    <circle cx="980" cy="505" r="5"/>
+    <circle cx="1110" cy="510" r="5"/>
+    <circle cx="1040" cy="320" r="5"/>
+    <circle cx="1185" cy="250" r="5"/>
+  </g>
+  <g fill="#f5e3bd" font-family="Arial, sans-serif" font-size="18">
+    <text x="640" y="452">玉林</text>
+    <text x="620" y="365">南宁</text>
+    <text x="688" y="405">广州</text>
+    <text x="748" y="350">上海</text>
+    <text x="790" y="314">北京</text>
+    <text x="842" y="345">首尔</text>
+    <text x="898" y="525">新加坡</text>
+    <text x="938" y="580">雅加达</text>
+    <text x="988" y="500">曼谷</text>
+    <text x="1118" y="505">新德里</text>
+    <text x="1048" y="315">仰光</text>
+    <text x="1193" y="245">迪拜</text>
+  </g>
+  <circle cx="628" cy="448" r="16" fill="none" stroke="#ffc870" stroke-width="2.6"/>
+</svg>

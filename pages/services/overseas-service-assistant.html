@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.assistant.docTitle">出海服务助手</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="assistant-page" data-i18n-title="page.assistant.docTitle">
+    <main class="assistant-shell" id="assistantShell">
+        <header class="assistant-page-head">
+            <a class="section-back map-screen-back section-topbar-back" href="../core-services.html" data-i18n="nav.core">返回核心服务</a>
+            <div class="assistant-header">
+                <div class="assistant-title-wrap">
+                    <h1 data-i18n="page.assistant.h1">出海服务助手 · 侨壮壮</h1>
+                    <p data-i18n="page.assistant.lead">玉林侨务数字平台智能助手，基于公开信息为您解答侨务相关问题</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="assistant-workspace">
+            <div class="assistant-chat-thread" id="assistantChatThread" aria-live="polite" data-i18n-aria-label="page.assistant.chatAria">
+                <div class="assistant-chat-thread-inner" id="assistantChatThreadInner"></div>
+            </div>
+            <div class="assistant-browse" id="assistantBrowseLayer">
+                <div class="assistant-column-main">
+                    <section class="assistant-suggest-section">
+                        <h2 class="assistant-suggest-heading" data-i18n="page.assistant.suggestHeading">推荐提问</h2>
+                        <div class="assistant-suggest-marquee" id="assistantSuggestMarquee" data-i18n-aria-label="page.assistant.suggestMarqueeAria">
+                            <div class="assistant-suggest-track" id="assistantSuggestTrack"></div>
+                        </div>
+                    </section>
+
+                    <section class="assistant-category-panel">
+                        <h2 data-i18n="page.assistant.categoryHeading">常见问题分类</h2>
+                        <div class="assistant-category-grid assistant-category-grid--four" id="assistantCategoryGrid"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="assistant-composer-dock" id="assistantComposerDock">
+            <div class="assistant-composer-card" id="assistantComposerCard" role="region" data-i18n-aria-label="page.assistant.composerAria">
+                <div class="assistant-composer-input-row">
+                    <textarea
+                        id="assistantQuestionInput"
+                        class="assistant-composer-textarea"
+                        rows="1"
+                        enterkeyhint="send"
+                        autocomplete="off"
+                        data-i18n-placeholder="page.assistant.inputPlaceholder"
+                        placeholder="你好！我是侨壮壮"
+                    ></textarea>
+                    <button id="assistantAskBtn" class="assistant-ask-btn assistant-ask-btn--icon" type="button" data-i18n-aria-label="page.assistant.send">
+                        <svg class="assistant-search-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                            <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button type="button" class="assistant-chat-exit" id="assistantChatExit" hidden data-i18n="page.assistant.collapseChat">收起对话</button>
+        </div>
+    </main>
+
+    <aside class="assistant-right" data-i18n-aria-label="page.assistant.dhPanel">
+        <button class="assistant-dh-toggle" id="assistantDhToggle" type="button" data-i18n-aria-label="page.assistant.dhToggleCollapse">▶</button>
+        <div class="assistant-dh-inner">
+            <video
+                src="../../images/brand/qiaozhuang-mascot-loop.webm"
+                poster="../../images/brand/qiaozhuang-mascot-loop-poster.png"
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                class="assistant-digital-human assistant-digital-human--idle"
+            ></video>
+            <video
+                src="../../images/brand/qiaozhuang-mascot-thinking.webm"
+                poster="../../images/brand/qiaozhuang-mascot-thinking-poster.png"
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                class="assistant-digital-human assistant-digital-human--thinking"
+            ></video>
+        </div>
+    </aside>
+
+    <div class="assistant-answer-modal" id="assistantAnswerModal" aria-hidden="true">
+        <div class="assistant-answer-card" role="dialog" aria-modal="true" aria-labelledby="assistantAnswerTitle">
+            <button type="button" class="assistant-answer-close" id="assistantAnswerClose" data-i18n-aria-label="page.assistant.modalClose">×</button>
+            <h3 id="assistantAnswerTitle" data-i18n="page.assistant.modalTitle">侨壮壮 · 提示</h3>
+            <div class="assistant-answer-body">
+                <div class="assistant-answer-content" id="assistantAnswerOutput"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/data-utils.js"></script>
+    <script src="../../js/ark-api-config.js"></script>
+    <script src="../../js/i18n-secondary-content.js"></script>
+    <script src="../../js/i18n.js"></script>
+    <script>I18n.boot();</script>
+    <script src="../../js/assistant-qiaozhuang-persona.js"></script>
+    <script src="../../js/page-overseas-assistant.js"></script>
+</body>
+</html>

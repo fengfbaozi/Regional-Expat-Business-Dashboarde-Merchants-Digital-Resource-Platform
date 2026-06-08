@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-11",
+  "note": "演示版合同模板数据，可直接由前端读取并替换占位符生成预览文本。",
+  "templates": [
+    {
+      "id": "investment_service_agreement",
+      "name": "侨商投资服务协议",
+      "category": "招商服务",
+      "description": "适用于侨商项目咨询、落地协助、政务对接等场景。",
+      "fields": [
+        { "key": "partyAName", "label": "甲方名称", "type": "text", "required": true, "defaultValue": "玉林市某招商服务中心" },
+        { "key": "partyACode", "label": "甲方统一社会信用代码", "type": "text", "required": false, "defaultValue": "91450900DEMO00001X" },
+        { "key": "partyBName", "label": "乙方名称", "type": "text", "required": true, "defaultValue": "广西某侨商科技有限公司" },
+        { "key": "partyBCode", "label": "乙方统一社会信用代码/证件号", "type": "text", "required": false, "defaultValue": "91450000DEMO00002Y" },
+        { "key": "projectName", "label": "项目名称", "type": "text", "required": true, "defaultValue": "侨资食品加工产业园项目" },
+        { "key": "serviceContent", "label": "服务内容", "type": "textarea", "required": true, "defaultValue": "项目咨询、政策解读、对接园区、协助办理落地手续。" },
+        { "key": "serviceFee", "label": "服务费用", "type": "text", "required": true, "defaultValue": "人民币 50,000 元" },
+        { "key": "startDate", "label": "服务开始日期", "type": "date", "required": true, "defaultValue": "2026-04-11" },
+        { "key": "endDate", "label": "服务结束日期", "type": "date", "required": true, "defaultValue": "2026-10-11" },
+        { "key": "signDate", "label": "签署日期", "type": "date", "required": true, "defaultValue": "2026-04-11" },
+        { "key": "signLocation", "label": "签署地点", "type": "text", "required": false, "defaultValue": "广西玉林" }
+      ],
+      "body": "侨商投资服务协议\n\n甲方：{{partyAName}}\n统一社会信用代码：{{partyACode}}\n\n乙方：{{partyBName}}\n统一社会信用代码/证件号：{{partyBCode}}\n\n鉴于乙方拟推进“{{projectName}}”，甲方具备投资咨询与落地协助能力，双方本着平等、自愿、诚信原则，就项目服务事项达成如下约定：\n\n第一条 服务事项\n1.1 甲方根据乙方需求提供如下服务：{{serviceContent}}\n1.2 服务期限为 {{startDate}} 至 {{endDate}}。\n\n第二条 费用与支付\n2.1 本协议项下服务费用为：{{serviceFee}}。\n2.2 乙方应按双方另行确认的付款节点向甲方支付相关费用。\n\n第三条 双方权利义务\n3.1 甲方应按照约定推进服务，并及时向乙方反馈项目进展。\n3.2 乙方应及时提供真实、完整、合法的项目资料，配合甲方完成对接与申报工作。\n\n第四条 保密条款\n双方对在合作过程中知悉的商业信息、项目资料及未公开数据承担保密义务，未经对方书面同意不得向第三方披露。\n\n第五条 违约责任\n任一方违反本协议约定，给对方造成损失的，应依法承担相应责任。\n\n第六条 争议解决\n因履行本协议产生争议，双方应先协商解决；协商不成的，可向甲方所在地有管辖权的人民法院提起诉讼。\n\n第七条 其他\n7.1 本协议自双方签字盖章之日起生效。\n7.2 本协议一式贰份，甲乙双方各执壹份，具有同等法律效力。\n\n签署日期：{{signDate}}\n签署地点：{{signLocation}}\n\n甲方（盖章）：________________\n授权代表：________________\n\n乙方（盖章）：________________\n授权代表：________________\n\n【演示说明】本模板仅用于系统功能演示，正式签约前请由专业法律人士审核。"
+    },
+    {
+      "id": "project_cooperation_mou",
+      "name": "项目合作意向书",
+      "category": "合作洽谈",
+      "description": "适用于项目初期接洽、合作框架确认、资源协调演示。",
+      "fields": [
+        { "key": "partyAName", "label": "甲方名称", "type": "text", "required": true, "defaultValue": "玉林市某产业园区管理委员会" },
+        { "key": "partyBName", "label": "乙方名称", "type": "text", "required": true, "defaultValue": "某海外华商联合会" },
+        { "key": "cooperationProject", "label": "合作项目", "type": "text", "required": true, "defaultValue": "东盟跨境供应链服务中心" },
+        { "key": "cooperationScope", "label": "合作范围", "type": "textarea", "required": true, "defaultValue": "产业资源导入、企业考察接待、招商推介与商务对接。" },
+        { "key": "targetAmount", "label": "意向投资金额", "type": "text", "required": false, "defaultValue": "人民币 3000 万元" },
+        { "key": "promotionPlan", "label": "近期推进计划", "type": "textarea", "required": true, "defaultValue": "30 日内完成互访，60 日内提交项目建议书，90 日内明确落地路径。" },
+        { "key": "signDate", "label": "签署日期", "type": "date", "required": true, "defaultValue": "2026-04-11" },
+        { "key": "signLocation", "label": "签署地点", "type": "text", "required": false, "defaultValue": "广西玉林" }
+      ],
+      "body": "项目合作意向书\n\n甲方：{{partyAName}}\n乙方：{{partyBName}}\n\n为推动“{{cooperationProject}}”合作，双方经友好协商，就下一阶段合作方向达成如下意向：\n\n第一条 合作目标\n双方拟围绕 {{cooperationProject}} 建立常态化协作机制，促进资源导入、项目交流与合作落地。\n\n第二条 合作范围\n{{cooperationScope}}\n\n第三条 资源投入\n乙方拟推动的意向投资金额为：{{targetAmount}}。\n甲方将根据项目实际情况提供政策咨询、园区信息和对接协助。\n\n第四条 推进安排\n{{promotionPlan}}\n\n第五条 保密与排他\n双方对接洽过程中形成的商业信息承担保密义务。本意向书不当然构成排他性合作承诺，除非双方另有书面约定。\n\n第六条 法律效力\n本意向书用于确认合作方向和推进机制，不作为最终交易合同。具体权利义务以双方后续签署的正式协议为准。\n\n签署日期：{{signDate}}\n签署地点：{{signLocation}}\n\n甲方代表：________________\n乙方代表：________________\n\n【演示说明】本模板用于系统演示与流程展示，不替代正式法律文件。"
+    },
+    {
+      "id": "cross_border_service_contract",
+      "name": "跨境商务服务委托合同",
+      "category": "委托服务",
+      "description": "适用于跨境咨询、翻译、会务协助、企业联络等服务展示。",
+      "fields": [
+        { "key": "partyAName", "label": "委托方（甲方）", "type": "text", "required": true, "defaultValue": "某海外投资企业" },
+        { "key": "partyBName", "label": "受托方（乙方）", "type": "text", "required": true, "defaultValue": "玉林市某涉侨综合服务机构" },
+        { "key": "serviceItems", "label": "委托事项", "type": "textarea", "required": true, "defaultValue": "商务翻译、会务接待、企业拜访预约、材料整理与政策咨询。" },
+        { "key": "serviceCycle", "label": "服务周期", "type": "text", "required": true, "defaultValue": "自签署之日起 3 个月" },
+        { "key": "totalFee", "label": "合同总金额", "type": "text", "required": true, "defaultValue": "人民币 20,000 元" },
+        { "key": "paymentMethod", "label": "付款方式", "type": "textarea", "required": true, "defaultValue": "合同签署后 5 个工作日内支付 50%，服务完成并验收后支付尾款 50%。" },
+        { "key": "deliverable", "label": "交付成果", "type": "textarea", "required": true, "defaultValue": "会议纪要、行程安排、对接清单、咨询建议报告。" },
+        { "key": "signDate", "label": "签署日期", "type": "date", "required": true, "defaultValue": "2026-04-11" },
+        { "key": "signLocation", "label": "签署地点", "type": "text", "required": false, "defaultValue": "广西玉林" }
+      ],
+      "body": "跨境商务服务委托合同\n\n甲方：{{partyAName}}\n乙方：{{partyBName}}\n\n根据甲方业务发展需要，甲方委托乙方提供跨境商务配套服务。双方经协商一致，订立本合同。\n\n第一条 委托事项\n乙方为甲方提供以下服务：{{serviceItems}}\n\n第二条 服务周期\n服务周期：{{serviceCycle}}\n\n第三条 合同金额与付款\n3.1 合同总金额：{{totalFee}}\n3.2 付款方式：{{paymentMethod}}\n\n第四条 交付成果\n乙方应向甲方提供以下成果：{{deliverable}}\n\n第五条 双方责任\n5.1 甲方应及时提供资料并配合确认关键节点。\n5.2 乙方应按照勤勉、审慎原则完成受托事项，并保证交付内容具备基本可用性。\n\n第六条 不可抗力\n如因不可抗力导致本合同无法履行，双方应及时协商处理。\n\n第七条 争议解决\n因本合同引起的争议，由双方协商解决；协商不成的，提交乙方所在地有管辖权的人民法院处理。\n\n签署日期：{{signDate}}\n签署地点：{{signLocation}}\n\n甲方签字/盖章：________________\n乙方签字/盖章：________________\n\n【演示说明】本模板仅供演示，正式使用前请补充交易事实并完成法务审查。"
+    }
+  ]
+}

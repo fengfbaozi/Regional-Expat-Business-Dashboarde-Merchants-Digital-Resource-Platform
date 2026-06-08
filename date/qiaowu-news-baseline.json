@@ -1,0 +1,16 @@
+{
+  "items": [
+    {"title": "国务院侨务办公室政府信息公开指南", "title_en": "", "time": "2008-03-24", "url": "http://www.gqb.gov.cn/news/2008/0324/1/8426.shtml", "source": "国务院侨务办公室", "summary": "", "summary_en": ""},
+    {"title": "国务院侨办行政审批（品牌活动列表入口）", "title_en": "", "time": "", "url": "https://www.gqb.gov.cn/gqb/xzsp/index.shtml", "source": "国务院侨务办公室", "summary": "", "summary_en": ""},
+    {"title": "国务院侨办信息公开专栏入口", "title_en": "", "time": "", "url": "https://www.gqb.gov.cn/xxgk.shtml", "source": "国务院侨务办公室", "summary": "", "summary_en": ""},
+    {"title": "国家移民管理局政府信息公开2024年度报告", "title_en": "", "time": "2025-01-26", "url": "https://www.nia.gov.cn/n741440/n741587/n788504/n1644198/c1696287/content.html", "source": "国家移民管理局", "summary": "", "summary_en": ""},
+    {"title": "中国侨网（涉侨权威资讯门户）", "title_en": "", "time": "", "url": "https://www.chinaqw.com/", "source": "中国侨网", "summary": "", "summary_en": ""},
+    {"title": "中华全国归国华侨联合会官网", "title_en": "", "time": "", "url": "https://www.chinaql.org/", "source": "中国侨联", "summary": "", "summary_en": ""},
+    {"title": "广西玉林市人民政府（侨务与要闻入口）", "title_en": "", "time": "", "url": "https://www.yulin.gov.cn/", "source": "玉林市人民政府", "summary": "", "summary_en": ""},
+    {"title": "广西壮族自治区侨务办公室机构职能（自治区党委统战部）", "title_en": "", "time": "", "url": "http://gat.gxzf.gov.cn/", "source": "广西党委统战部（涉侨公开信息入口）", "summary": "", "summary_en": ""},
+    {"title": "中国政府网「华侨」信息检索入口", "title_en": "", "time": "", "url": "https://www.gov.cn/", "source": "中国政府网", "summary": "", "summary_en": ""}
+  ],
+  "meta": {
+    "description": "侨情列表兜底条：在模型/API 不足 100 条时与 API 结果合并；含中央与地方公开门户入口，便于演示时凑够条数。建议定期运行 fetch_qiaowu_to_date.py 以模型生成替换为更细粒度稿件链接。"
+  }
+}
