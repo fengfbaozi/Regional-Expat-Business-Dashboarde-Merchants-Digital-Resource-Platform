@@ -1,14 +1,21 @@
 /* =======================================================================
- * js/ark-api-config.js（重构版 —— 运行时解密 + 离线降级）
+ * js/ark-api-config.js（v2.1 演示加密版 —— 运行时 AES 解密 + 离线降级 + localStorage 密码记忆）
  *
  * 职责：
- *   1. 不再 fetch 任何明文 volc-ark-apis.json；
- *   2. 内置 AES(Base64) 密文锁 + 用户输入授权码；
- *   3. 解密成功 → 注入 6 个全局配置对象；
- *   4. 解密失败 / 用户取消 → 自动离线 Mock 模式（仍能渲染）。
+ *   1. 不再 fetch 任何明文 JSON；前端只携带 Base64 AES 密文锁。
+ *   2. 首次进入页面时弹窗请用户输入密码（演示密码：demo1234）。
+ *   3. 用密码解密密文 → JSON.parse → 注入到 window.*；
+ *      若解密后的字段仍含有占位符（YOUR_ / REPLACE_WITH / 空串），
+ *      视为"未配置真实密钥"，相应接口自动按离线 Mock 模式降级，
+ *      不会拿着无效 AK 去触发外部请求。
+ *   4. 密码保存在 localStorage（ARK_DEMO_PASS_CACHE），
+ *      只要该 Key 存在，后续进入页面不再弹窗。
+ *      - 在浏览器控制台执行：clearArkAuth()  可清除缓存重新输入。
+ *      - 或在开发者工具 → Application → Local Storage 手动删除。
  *
  * 下游契约（任何脚本都不应再读 volc-ark-apis.json）：
- *   window.__BAIDU_MAP_AK             string (可空)
+ *   window.__BAIDU_MAP_AK             string（真实AK或空串；空=离线）
+ *   window.__BAIDU_MAP_STYLE_ID       string（个性化地图样式码，可空）
  *   window.ARK_DATA_CHAT_DEFAULTS     { endpoint, model }
  *   window.ARK_QIAOZHUANG_DEFAULTS    { endpoint, model }
  *   window.ARK_TRANSLATION_RESPONSES_DEFAULTS { endpoint, model }
@@ -16,26 +23,59 @@
  *   window.TRANSLATION_ARK            { enabled, endpoint, apiKey }
  *   window.ASSISTANT_ARK              { use_stream, apiKey, endpoint, model }
  *   window.YXQ_VOLC_KEYS              { dataApiKey, translationApiKey,
- *                                       qiaozhuangApiKey, baiduMapAk }
+ *                                       qiaozhuangApiKey, baiduMapAk,
+ *                                       baiduMapStyleId }
  *   window.YXQ_CONFIG_MODE            "online" | "offline-mock"
+ *   window.clearArkAuth()             清除密码缓存（下一次刷新重新输入）
  * ======================================================================= */
 (function (global) {
     "use strict";
 
-    // ---- 1. 超长 Base64 密文锁（与 CryptoJS.AES.encrypt(plaintext, password) 的互认格式） ----
+    // ---- 1. 超长 Base64 密文锁（与 CryptoJS.AES.encrypt(plaintext, password) 互认） ----
+    // 生成方式（v2.1）：
+    //   $env:ARK_DEMO_PASS="你的密码"; node encrypt_tool.js
+    //   把控制台输出的 Base64 完整粘到下面 ENCRYPTED_CONFIG_STRING。
+    //   当前这份密文是示例配置，密码 demo1234 可解密并得到 YOUR_* 占位字段。
     const ENCRYPTED_CONFIG_STRING =
-        "U2FsdGVkX19FPQ4JMYPzlaRHxo8qYxx5KclrUsyzSISAOdvv7swY+1mNwIzpUaIyusX/j5QBUp6M5WMGmbWyxNDslq9/a632R2MjDf/UX5SZJ0neH35xR4AIqljKdyE9/dCl67tpe8hlDI2JRriEf2lKgSX0YAu6xwetXs8RbJ2Di60VjXMQ5FE72skyuoGpOqlAdqy2f4MoiU3jGUvJrUKFNRRo4ZgDRb9N9kploFeixX/DzBvgmDZrZzTwvzdbeC+p65iDdG7OhwSYPaKy0OmrgfRDz8dwqKd41e7hohiBdITV+nK82kg7gMs3lYetX7VV6JRnOJIm3jam1SZwP1Lucpqlh4YNu2YSnEK23rf13k332Pbz8BryZ1ITfbr2x1mxtdhhVgnh34VQ2+twZ84pZPy6raqKu2uj+ZanBvAOQ/WA8HM/r8YHkOlvGpxNRDMmhDYK5vHo1ackZfNG1xZDwcr4mx+wqBSt5AKoTeJMhsD7bpbPEr+ZtBJuqQ3gUbdih+GmgJVegbsMDgitRdiKcAeOjC1Xhk0qlfmN2cWF5CNfOne5X0qjX7o12L3kNQLrB5suv1ODvG/KlRT/ocr2gzvYf87jwas3CMXO20tGSoqvvAQ/sF0+SVWhm6DEVFWPhqihNJ9nn0Y1HGmzLFn3dke1y7OartNJVUihumuSzCfGs4A/xk36dAyv86ytBlSfxQCq3GXVQn7eJhrNsDH16CsLBp+a5NU0YGt++Ni8F85QYJOVmbW/6xcOyitVdEPFBoV5cFTYgMgm1+tmqh11t+OXCmpiEys7CuaxuTT7xKGOlw3+Oln0j16JbTLxE8yJJTKaIHmIVdxA5pZewgEXnmDptWRckz0HBGh/odajbwfFhTt4JdPwySGIOTeE4BhonIBYhiEA/sD15lAUW/iWR5pI+SwxOkDpRUc8V2AvgrcI8fYwub4QWkC9IGyN280v0ebX+FYTmpDE9Z4JyF9Yhw2qhL7RGb8AnTfB+LV6VD4phZ6V5lZTmFJvpbFXQIuisoOGkXvEv6K6FIascSMoR6dppHT0xncPS5fCkIjXyCBQnO2rrsLf7gIcTnHAe9uFSxerNak7eUL8F+rSIAbgyhASUAkoAWp7PTjvw4l0bKnfhfbsoh0eGYKTLtHfUfWYRxMqsHdG/p7Lczfn+tdmLM2ozVG/3EtUynKf4cgF4VrHxjoJ/U6DSjn220ysoXu81A0wHIGskJDCqThOfsXtEUl6h2RDBXnfcz+81XH1tFw7TewhKT8jkHqNTntZIGPSvuXlZdZceQ/UGril+8y4ZYqKdyD6IIY0qTem01MPw49Zl4vBjhCmhU2IAE6x9zuumAYiQkGDg4/SkDpVwshXFgv6eUggoxwqey9V0nbWoLtDsb6JpNBXjIzs1dzL2sKkkXHCgZw6/CNV0MvQp00HT4nG4kT0a8BiQm1qC8m8GrcBR/OiS0H54DvhPJ+MPhdON7vdjF1OLnQM8w6OM4sWU1274kdL5i/TKFi2aNLXBr791uWA2p11eQgpmm7k";
+        "U2FsdGVkX1+z2ZCs52ARM70adiKh43ab5F0S2v8xQBM8PEC7xWE8eZdJZDSgicAiLftwGNxG8Ih0jeAbuAg6S9DFWWElW4bP1LFC7uM4+NxY3Os8Jdss07KJ3Vrl+MxL0RJuk6A6VR917leClf3LuUcgM0disFkhNHBqx7km2KJRRoh5QwE71K65bE6S3LYS2js6HROUBRwGDDfXm81ipN0EVpoxiNG70MUHuLbcLcH0RRLSMzjCBAcSbYx7dPQ6DUPo2MktuNW7uijVzTmqYUAYft4WC6KtDSs+RXN5RXnDKuxl3M+aaSnKF+2T0WRhdzrXhAnNA6jAenwWTtzCNnYsdQA9NyoAP22jg5XSrJxcow7yKAEQvQB32Du+pPliEVt89HG9HioNRyWpfCEI142QMfoBxgqr5kNPWYQs3nThGa9MpUzNBSKXVVw0Kvl2EXAU3GENU2u+xgNRnNvWSk5Uc9XvYil9u40gqi6dKgVtxxg/5ab99ndUYdD45vdVFyT2GISuEMoFZlZetmZ738Z+giNwTfnam0+TCRf8mM0D0D5xD4p2VF+VC2rtBcsAOReQ9927Aj5UjY506MqKxDY7rr7ds+Z8lH6j9BtGEltgcJrjMODartyloPJqIoaxa8VjECTb7TZ+rvRQ6/KDZaRw4h1rTkpCEAOu3WZXpKU1HSpBusf6qrWDQgERby9lavWbVncwCUhtICpbLAVBDNY9lJ4n10yZ7ojQJxGZCflaGnVdJt2C0cPMqN/s63DewzM1MKT9ol8GYkTWgoEwAhrijEDnP3yRkEnQvJ1dlfkrD/gUkcWGroyLvnj1K+nKrq7hI9nbUYGxzBXBF9Jha520hkO6lUCH7OrxOpwx1l81PO+DU7XclC6eNEg7pr5Z/7r70SPG6tOvO92rdu9el8c5Ttdd+PXZNOMMGJq8jt+dIFZaM1QmMBWWZusqyIEjUka9NUR/mC/v4IWQ1RMzNR1breBEFKeJQh1KtWZMpj4BXQRTta1eM09xEsqW4nJkYgjbmiYL8jbHyrb9qD9aoMN5tRuxGpz4bDipq5By06zcKPqXrpjdRx1K6E4Jd+dQdoqmNWG+SjiYeJ5PnJETBCBes4WCRaTeFwY5X35pbQbSgmg31NpZ8aevYiUcUW2ia2v10+R9ytdOyC+tQPlNFTh9TvDm8hczXtrl8+wFLRX08UX1xH56t11n82eqdX41LwrnlBUNIsJVtT9iBUKrYfY3NyLqqw2+nK7RGk+Ma6wgQ7eDAleAmOqSiLU3x6XxfRZ0okd15ac8C5Z1ifdoXIAEzTI4tA7GjsS9GNMvTn7P2jJcwh3OdfW9JWc46INB8OBA0QvJ0RET3BWq96VtUUlUzZCPUvNEW6kie+/ceVGd6RCoLAztmHyzlSnwbKbPpwownUUA0yVYXPmUY1xmatIRoEQMGoNECcjbPr0AF1GNgBKe5tD0gNV14XU1vzvTEl/6eCWsDoVA6Vc6mMwDoGPdzGHr5W3yFYhOLxEvAAmpFHT5VKLt7Np84eUkrCbV";
 
-    // ---- 2. 注入解密后的字段到全局 ----
+    // 本地缓存 Key；与页面同源，不会跨站泄露
+    const LS_PASS_KEY = "ARK_DEMO_PASS_CACHE";
+    // 调试开关：设为 true 会在 console 打印解密后的字段（不含密码），便于排查
+    const DBG = false;
+
+    // ---- 2. 把解密后的配置对象注入到 window.* ----
     function installConfigFromObject(data) {
         if (!data || typeof data !== "object") data = {};
 
-        const dataApiKey = String(data.dataApiKey || "").trim();
-        const translationApiKey = String(data.translationApiKey || "").trim() || dataApiKey;
-        const qiaozhuangApiKey = String(data.qiaozhuangApiKey || "").trim();
-        const baiduMapAk = String(data.baiduMapAk || "").trim();
+        // "看起来还是占位符"的判断条件。
+        // 为空 / 以 YOUR_ 开头 / 以 REPLACE_WITH 开头 → 视为未配置
+        function looksLikePlaceholder(v) {
+            if (v == null) return true;
+            const s = String(v).trim();
+            if (!s) return true;
+            return /^(YOUR_|REPLACE_WITH)/i.test(s);
+        }
 
+        const dataApiKey = looksLikePlaceholder(data.dataApiKey)
+            ? ""
+            : String(data.dataApiKey).trim();
+        const translationApiKey = looksLikePlaceholder(data.translationApiKey)
+            ? (dataApiKey || "")              // 翻译未单独配置 → 复用 dataApiKey
+            : String(data.translationApiKey).trim();
+        const qiaozhuangApiKey = looksLikePlaceholder(data.qiaozhuangApiKey)
+            ? ""
+            : String(data.qiaozhuangApiKey).trim();
+        const baiduMapAk = looksLikePlaceholder(data.baiduMapAk)
+            ? ""
+            : String(data.baiduMapAk).trim();
+        const baiduMapStyleId = looksLikePlaceholder(data.baiduMapStyleId)
+            ? ""
+            : String(data.baiduMapStyleId).trim();
+
+        // 注入地图 Key / StyleId（与 map-shared / page-map / main.js 对接）
         global.__BAIDU_MAP_AK = baiduMapAk;
+        global.__BAIDU_MAP_STYLE_ID = baiduMapStyleId;
 
         global.ARK_DATA_CHAT_DEFAULTS = Object.assign({}, data.ARK_DATA_CHAT_DEFAULTS || {});
         global.ARK_QIAOZHUANG_DEFAULTS = Object.assign({}, data.ARK_QIAOZHUANG_DEFAULTS || {});
@@ -48,7 +88,7 @@
         );
 
         global.DATA_ACQUISITION_ARK = Object.assign(
-            { endpoint: "", apiKey: "", model: "", enabled: true, temperature: 0.35, max_tokens: 8192, cacheTtlMs: 600000 },
+            { endpoint: "", apiKey: "", model: "", enabled: true, temperature: 0.35, max_tokens: 12288, cacheTtlMs: 600000 },
             data.DATA_ACQUISITION_ARK || {},
             { apiKey: dataApiKey }
         );
@@ -59,61 +99,115 @@
             { apiKey: qiaozhuangApiKey }
         );
 
+        // 聚合 Key（供下游统一读取）
         global.YXQ_VOLC_KEYS = {
             dataApiKey: dataApiKey,
             translationApiKey: translationApiKey,
             qiaozhuangApiKey: qiaozhuangApiKey,
-            baiduMapAk: baiduMapAk
+            baiduMapAk: baiduMapAk,
+            baiduMapStyleId: baiduMapStyleId
         };
+
+        if (DBG) {
+            // 仅在调试模式下打印；永远不会打印用户输入的密码
+            try {
+                console.info("[ark-api-config] 注入后的 Key 快照：", {
+                    dataApiKey: dataApiKey ? "已设置" : "空/占位 → 离线",
+                    qiaozhuangApiKey: qiaozhuangApiKey ? "已设置" : "空/占位 → 离线",
+                    baiduMapAk: baiduMapAk ? "已设置" : "空/占位 → 离线",
+                    baiduMapStyleId: baiduMapStyleId || "(未配置)",
+                    mode: dataApiKey && baiduMapAk ? "online" : "offline-mock"
+                });
+            } catch (e) {}
+        }
     }
 
-    // ---- 3. 空配置（离线 Mock 模式的降级对象）----
-    function installEmptyOfflineConfig() {
+    // ---- 3. 空配置（离线 Mock 模式的降级对象） ----
+    function installEmptyOfflineConfig(reason) {
         installConfigFromObject({});
         global.YXQ_CONFIG_MODE = "offline-mock";
         if (typeof console !== "undefined" && console.warn) {
-            console.warn("[ark-api-config] 未获取访问授权码 → 进入离线 Mock 模式，所有接口 Key 为空；页面将只使用 date/* 的静态缓存渲染。");
+            console.warn("[ark-api-config] 进入离线 Mock 模式（" + (reason || "未授权/无密钥") + "）。" +
+                " 首页卡片、地图页将只显示本地静态缓存数据。");
         }
     }
 
     // ---- 4. 尝试解密（依赖 CryptoJS）----
     function tryDecrypt(userPassword) {
         if (typeof CryptoJS === "undefined") {
-            return { ok: false, reason: "CryptoJS 未加载" };
+            return { ok: false, reason: "CryptoJS 未加载 —— 请检查 index.html 中是否引入了 crypto-js.min.js" };
         }
         try {
             const words = CryptoJS.AES.decrypt(ENCRYPTED_CONFIG_STRING, userPassword);
             const plain = words.toString(CryptoJS.enc.Utf8);
-            if (!plain) return { ok: false, reason: "解密结果为空（密码错误？）" };
+            if (!plain) return { ok: false, reason: "解密结果为空（密码错误或密文被改写）" };
             const obj = JSON.parse(plain);
             return { ok: true, data: obj };
         } catch (err) {
-            return { ok: false, reason: (err && err.message) || "解密/JSON 失败" };
+            return { ok: false, reason: "解密/JSON 解析失败：" + ((err && err.message) || err) };
         }
     }
 
-    // ---- 5. 相对路径助手（保持与旧版一致：无论在哪一层 pages 下，都能定位到 date/）----
-    function resolveDateAsset(fileName) {
-        var scriptSrc =
-            (typeof document !== "undefined" && document.currentScript && document.currentScript.src) || "";
-        if (!scriptSrc) return "date/" + String(fileName || "");
+    // ---- 5. localStorage 读写 ----
+    function readCachedPass() {
         try {
-            return new URL("../date/" + fileName, scriptSrc).href;
+            if (!global.localStorage) return null;
+            return global.localStorage.getItem(LS_PASS_KEY) || null;
         } catch (e) {
-            return "date/" + fileName;
+            return null;
         }
     }
-    global.YXQ_resolveDateAsset = resolveDateAsset;
+    function writeCachedPass(pass) {
+        try {
+            if (!global.localStorage) return false;
+            global.localStorage.setItem(LS_PASS_KEY, pass);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+    function clearCachedPass() {
+        try {
+            if (!global.localStorage) return false;
+            global.localStorage.removeItem(LS_PASS_KEY);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+    // 对外暴露一个清除缓存方法
+    global.clearArkAuth = function () {
+        clearCachedPass();
+        console.info("[ark-api-config] 密码缓存已清除。刷新页面后将重新提示输入。");
+    };
 
-    // ---- 6. 主流程：prompt → 解密 → 成功/降级 ----
+    // ---- 6. 主流程：优先读缓存 → 缓存无效才弹窗 ----
     function bootstrap() {
+        // step A：尝试用 localStorage 里缓存的密码解密
+        const cached = readCachedPass();
+        if (cached) {
+            const res = tryDecrypt(cached);
+            if (res.ok && res.data) {
+                installConfigFromObject(res.data);
+                global.YXQ_CONFIG_MODE = (global.YXQ_VOLC_KEYS.dataApiKey && global.YXQ_VOLC_KEYS.baiduMapAk)
+                    ? "online"
+                    : "offline-mock";
+                return; // 一次成功 → 不再弹窗
+            }
+            // 缓存密码解密失败，可能是密文被更新或密码被改掉；清掉缓存后走弹窗路径
+            clearCachedPass();
+        }
+
+        // step B：第一次进入 → prompt 请用户输入密码
         let userPassword = null;
         try {
             if (typeof window !== "undefined" && typeof window.prompt === "function") {
                 userPassword = window.prompt(
-                    "请输入平台访问授权码（演示密码：demo1234；仅供测试，不含真实密钥）：\n\n" +
-                    "• 正确输入 → 启用火山引擎接口、百度地图、侨壮壮对话等在线能力\n" +
-                    "• 取消或留空 → 自动进入「离线模拟数据模式」，仅使用本地静态缓存渲染",
+                    "请输入平台访问授权码（演示密码：demo1234；仅供测试，解密出的是示例占位符）：\n\n" +
+                    "• 正确输入你的密码 → 启用火山引擎接口、百度地图、侨壮壮对话等在线能力\n" +
+                    "• 取消或留空 → 自动进入「离线模拟数据模式」，仅使用本地静态缓存渲染\n\n" +
+                    "（本页面只会在第一次进入时弹窗，密码会保存在本浏览器；" +
+                    " 如需清除，请在控制台执行 clearArkAuth() 后刷新）",
                     ""
                 );
             }
@@ -122,27 +216,29 @@
         }
 
         if (userPassword === null || userPassword === "") {
-            // 用户取消 / 未输入 → 直接降级
-            installEmptyOfflineConfig();
+            // 取消 / 未输入 → 直接降级
+            installEmptyOfflineConfig("用户未输入授权码");
             return;
         }
 
         const result = tryDecrypt(userPassword);
         if (result.ok && result.data) {
+            // 成功：把密码写入缓存，以后不再弹窗
             installConfigFromObject(result.data);
-            global.YXQ_CONFIG_MODE = "online";
-            if (typeof console !== "undefined" && console.info) {
-                console.info("[ark-api-config] 授权通过，已注入在线配置（" + Object.keys(result.data).length + " 个字段）。");
-            }
+            global.YXQ_CONFIG_MODE = (global.YXQ_VOLC_KEYS.dataApiKey && global.YXQ_VOLC_KEYS.baiduMapAk)
+                ? "online"
+                : "offline-mock";
+            writeCachedPass(userPassword);
         } else {
-            // 解密失败：弹一次提示后降级，不抛错、不崩溃
+            // 解密失败：弹一次提示后降级，**不把错误密码缓存**
             try {
                 if (typeof window !== "undefined" && typeof window.alert === "function") {
                     window.alert("⚠️ 授权码不正确：" + (result.reason || "") +
-                        "\n系统将自动进入「离线模拟数据模式」。");
+                        "\n系统将自动进入「离线模拟数据模式」。" +
+                        "\n需要再次尝试的话，请在控制台执行 clearArkAuth() 后刷新页面。");
                 }
             } catch (e) {}
-            installEmptyOfflineConfig();
+            installEmptyOfflineConfig(result.reason);
         }
     }
 

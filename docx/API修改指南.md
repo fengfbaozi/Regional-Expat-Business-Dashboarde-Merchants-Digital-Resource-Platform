@@ -67,12 +67,20 @@ d:\玉小侨demo\js\ark-api-config.js
 
 ### 2.5 刷新浏览器，输入你自己的密码
 
-打开 `index.html`、`map.html`、`pages/services/overseas-service-assistant.html`，页面首次打开会弹一个 `prompt` 输入框，**输入你第 2.3 步设置的密码**：
+打开 `index.html`、`map.html`、`pages/services/overseas-service-assistant.html`，页面**首次进入**会弹一个 `prompt` 输入框，**输入你第 2.3 步设置的密码**：
 
 - ✅ 密码正确 → 解密注入配置，所有在线能力生效
 - ❌ 密码错误 / 点取消 → 自动进入「离线 Mock 模式」，仅显示静态缓存内容
 
-> 💡 浏览器每次刷新都会要求输入密码。如果不想每次输入，可以把 `js/ark-api-config.js` 中的解密流程改造为从 `localStorage` 读取，或直接把密文替换成你自己的版本后始终用同一个密码。
+> 💡 **只弹一次**：密码会保存在浏览器 `localStorage`（Key：`ARK_DEMO_PASS_CACHE`）。
+> 之后再打开任何页面都会自动用缓存密码解密，不会再弹。
+> 想让它重新弹，打开浏览器控制台执行：
+>
+> ```
+> clearArkAuth()
+> ```
+>
+> 然后刷新页面即可。
 
 ---
 
@@ -199,6 +207,27 @@ d:\玉小侨demo\js\ark-api-config.js
 ```
 
 少一步就会读到旧的密文。
+
+### Q8：为什么输入 `demo1234` 后地图还是不显示、侨壮壮也不会回复？
+**A**：因为 `demo1234` 是**演示密码**，它解密出来的是一份"示例配置"，里面都是 `YOUR_BAIDU_MAP_AK` 这样的占位符。当前脚本会自动把这些占位符置空，让页面进入 `offline-mock` 模式——不会用无效 AK 去触发外部请求。
+
+要让在线能力真正生效，你必须：
+
+1. 在 `date/volc-ark-apis.json` 写入**真实密钥**；
+2. 用自己设置的密码运行 `node encrypt_tool.js` 重新生成密文；
+3. 把新密文粘回 `js/ark-api-config.js` 的 `ENCRYPTED_CONFIG_STRING`；
+4. 打开页面后输入你自己设置的密码（**不是 `demo1234`**）。
+
+### Q9：怎么快速检查当前到底是 online 还是离线模式？
+**A**：在浏览器按 F12 打开开发者工具 → Console，执行：
+
+```javascript
+window.YXQ_CONFIG_MODE      // "online" 或 "offline-mock"
+window.YXQ_VOLC_KEYS        // 当前注入的各 key 快照（baiduMapAk 等）
+clearArkAuth()              // 清掉密码缓存，刷新重新输入
+```
+
+如果 `YXQ_CONFIG_MODE = offline-mock`，说明要么你没输入密码，要么解密后的字段仍是占位符——请回到 Q8 的 4 步流程检查。
 
 ---
 
