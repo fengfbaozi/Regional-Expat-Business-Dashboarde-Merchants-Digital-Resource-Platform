@@ -1,7 +1,13 @@
 # API Key 修改指南
 
-> 📍 **唯一要改的文件：`date/volc-ark-apis.json`** —— 改完保存，刷新浏览器就生效。
-> 不需要改任何 `.js`、`.html`、`.py` 文件。
+> 📍 **v2.1 演示加密版**：项目前端不再直接读取明文 JSON，而是通过 **AES 密文锁** 解密后注入。
+>
+> 更新密钥的标准流程变成了 **4 步**：
+>
+> 1. 编辑 `date/volc-ark-apis.json` 填入真实 API Key / AK
+> 2. `$env:ARK_DEMO_PASS="你的密码"; node encrypt_tool.js` 生成新密文
+> 3. 将控制台输出的 Base64 粘贴到 `js/ark-api-config.js` 的 `ENCRYPTED_CONFIG_STRING`
+> 4. 重新打开网页，在 prompt 输入你自己的密码即可
 
 ---
 
@@ -18,9 +24,9 @@
 
 ---
 
-## 二、一步步操作
+## 二、一步步操作（v2.1 加密版）
 
-### 2.1 打开文件
+### 2.1 打开配置文件
 
 用记事本、VS Code 或任意编辑器打开：
 
@@ -37,13 +43,36 @@ d:\玉小侨demo\date\volc-ark-apis.json
 + "dataApiKey": "老师账号的新API-KEY",
 ```
 
-### 2.3 保存，刷新浏览器
+### 2.3 生成新的 AES 密文锁（关键步骤 ⭐）
 
-打开 `index.html`、`map.html`、`pages/services/overseas-service-assistant.html`，验证：
+在项目根目录打开 **PowerShell**，运行：
 
-- ✅ 首页「侨情动态」卡片有内容
-- ✅ 地图页能看到地图和东南亚城市点
-- ✅ 侨壮壮助手页输入问题能回复
+```powershell
+$env:ARK_DEMO_PASS="你自己设置的密码"; node encrypt_tool.js
+```
+
+说明：
+- 密码你自己定（建议字母+数字，别用简单的 `1234`、`demo1234`）。
+- 脚本会在控制台输出一长串 Base64 密文，同时写入 `date/volc-ark-apis.cipher.cryptojs.txt`。
+
+### 2.4 把密文粘到前端配置里
+
+打开：
+
+```
+d:\玉小侨demo\js\ark-api-config.js
+```
+
+找到 `const ENCRYPTED_CONFIG_STRING = "..."` 这一行，把引号里的内容替换成上一步控制台输出的密文（长串 Base64）。
+
+### 2.5 刷新浏览器，输入你自己的密码
+
+打开 `index.html`、`map.html`、`pages/services/overseas-service-assistant.html`，页面首次打开会弹一个 `prompt` 输入框，**输入你第 2.3 步设置的密码**：
+
+- ✅ 密码正确 → 解密注入配置，所有在线能力生效
+- ❌ 密码错误 / 点取消 → 自动进入「离线 Mock 模式」，仅显示静态缓存内容
+
+> 💡 浏览器每次刷新都会要求输入密码。如果不想每次输入，可以把 `js/ark-api-config.js` 中的解密流程改造为从 `localStorage` 读取，或直接把密文替换成你自己的版本后始终用同一个密码。
 
 ---
 
@@ -162,6 +191,15 @@ d:\玉小侨demo\date\volc-ark-apis.json
 ### Q6：我想彻底关掉某个功能？
 **A**：找到对应的 `*_ARK` 块，把 `"enabled": true` 改成 `"enabled": false`。
 
+### Q7：v2.1 后为什么改完 JSON 刷新浏览器没反应？
+**A**：v2.1 前端不再直接读 `volc-ark-apis.json`，而是读 `js/ark-api-config.js` 里硬编码的密文。必须走完完整流程：
+
+```
+改 JSON → $env:ARK_DEMO_PASS="你的密码"; node encrypt_tool.js → 把密文粘到 ENCRYPTED_CONFIG_STRING → 刷新浏览器并输入密码
+```
+
+少一步就会读到旧的密文。
+
 ---
 
 ## 五、修改清单（按顺序打勾）
@@ -173,8 +211,10 @@ d:\玉小侨demo\date\volc-ark-apis.json
 - [ ] 替换 `baiduMapStyleId` 为老师账号下的个性化地图样式码（当前值 `f4735e2f6ce44a588e0ff559db115f3a`）
 - [ ] 替换 `ARK_QIAOZHUANG_DEFAULTS.model` 为老师豆包智能体的 `bot-xxxx` ID
 - [ ] （可选）替换两个 `ep-xxxx` 模型 ID 为老师账号下的推理接入点
-- [ ] 保存文件（Ctrl + S）
-- [ ] 刷新 `index.html`，看首页侨情卡片是否正常
+- [ ] 保存 `date/volc-ark-apis.json`（Ctrl + S）
+- [ ] **⭐ v2.1 必须：** 在 PowerShell 中运行 `$env:ARK_DEMO_PASS="你的密码"; node encrypt_tool.js`
+- [ ] **⭐ v2.1 必须：** 把控制台输出的长串 Base64 粘到 `js/ark-api-config.js` 的 `ENCRYPTED_CONFIG_STRING`
+- [ ] 刷新 `index.html`，在 prompt 输入你自己的密码 → 看首页侨情卡片是否正常
 - [ ] 刷新 `pages/map.html`，看地图是否显示
 - [ ] 刷新 `pages/services/overseas-service-assistant.html`，和侨壮壮聊一句试试
 - [ ] ✅ 完成！
@@ -203,4 +243,7 @@ d:\玉小侨demo\date\volc-ark-apis.json
 └────────────────────────────────────────────────────────────┘
 ```
 
-> ⚠️ **安全提醒**：`volc-ark-apis.json` 里有真实密钥，不要上传到公开的 GitHub，也不要发给不相关的人。`.gitignore` 已经包含它了，本地保存即可。
+> ⚠️ **安全提醒**：
+> 1. `date/volc-ark-apis.json` 里有真实密钥，**不要上传到公开的 GitHub，也不要发给不相关的人**。`.gitignore` 已经包含它了，本地保存即可。
+> 2. `js/ark-api-config.js` 里只存 AES 密文（Base64），**密码不要写死在代码里**，每次打开页面通过 prompt 输入即可。
+> 3. 如果你把 `ARK_DEMO_PASS` 写进了 `.ps1` / `.bat` 批处理脚本，记得也把它们加到 `.gitignore`。
